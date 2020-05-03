@@ -1,0 +1,8 @@
+currently working on:
+Adding in font-awesome
+ - Current problem, loads without error, but the fonts, don't show up.
+
+
+consider removing:
+assets/css/plugins/fontawesome-5.13.0-web/scss/sprites
+assets/css/plugins/fontawesome-5.13.0-web/scss/svgs

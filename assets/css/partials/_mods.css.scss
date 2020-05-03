@@ -1,79 +1,79 @@
-header.hero-image {
-  height: 200px;
+// header.hero-image {
+//   height: 200px;
 
-  @include breakpoint(md) {
-    height: 300px;
-  }
+//   @include breakpoint(md) {
+//     height: 300px;
+//   }
 
-  @include breakpoint(md) {
-    height: 400px;
-  }
-}
+//   @include breakpoint(md) {
+//     height: 400px;
+//   }
+// }
 
-.single-content {
-  a {
-    color: $light-blue;
-    &:hover {
-      color: $light-grey;
-    }
-  }
+// .single-content {
+//   a {
+//     color: $light-blue;
+//     &:hover {
+//       color: $light-grey;
+//     }
+//   }
 
-  p.meta {
-    a {
-      color: $light-grey;
-    }
-  }
+//   p.meta {
+//     a {
+//       color: $light-grey;
+//     }
+//   }
 
-  pre {
-    border: 0px;
-    padding: 0px;
-  }
-}
+//   pre {
+//     border: 0px;
+//     padding: 0px;
+//   }
+// }
 
-.source {
-  background-color: #FFCC66;
-  padding: 10px;
-  margin: 10px 0px;
-  font-size: 25px;
-  border-radius: 4px;
+// .source {
+//   background-color: #FFCC66;
+//   padding: 10px;
+//   margin: 10px 0px;
+//   font-size: 25px;
+//   border-radius: 4px;
 
-  a {
-    color: $text-color;
-  }
-  a:hover {
-    color: #FFFFFF;
-  }
-}
+//   a {
+//     color: $text-color;
+//   }
+//   a:hover {
+//     color: #FFFFFF;
+//   }
+// }
 
-.view-more {
-  display: block;
-  margin: 20px auto;
-  width: 50%;
-}
+// .view-more {
+//   display: block;
+//   margin: 20px auto;
+//   width: 50%;
+// }
 
-footer.single {
-  .category-list {
-    padding-right: 20px;
-  }
-  .user-icon {
-    width: 100px;
-    height: 100px;
-  }
-}
+// footer.single {
+//   .category-list {
+//     padding-right: 20px;
+//   }
+//   .user-icon {
+//     width: 100px;
+//     height: 100px;
+//   }
+// }
 
-nav.panel {
-  z-index: 5;
-  position: fixed;
-  left: -31.2emem;
-  width: 31.2emem;
-}
+// nav.panel {
+//   z-index: 5;
+//   position: fixed;
+//   left: -31.2emem;
+//   width: 31.2emem;
+// }
 
-.menu-trigger {
-  margin-left: 15px;
-  left: 0px;
-}
+// .menu-trigger {
+//   margin-left: 15px;
+//   left: 0px;
+// }
 
-.read-another-section {
-  max-width: 100%;
-  margin-left: 0px;
-}
+// .read-another-section {
+//   max-width: 100%;
+//   margin-left: 0px;
+// }
