@@ -1,0 +1,42 @@
+
+form
+    +clearfix
+    label
+        font-family: $sans
+        +font-size(20)
+        margin: 10px 0 0
+
+    input.form-control,
+    textarea.form-control
+        box-shadow: none
+        border-radius: 0
+        background-color: #fff
+        resize: vertical
+        +placeholder
+            color: #ccc
+
+        &:focus
+            outline: none
+            box-shadow: none
+
+    textarea.form-control
+        height: 100px
+
+    input[type=submit]
+
+
+
+        border: solid 2px #69A2E3
+        background-color: #69A2E3
+        font-size: 2em
+        color: #fff
+        border-radius: 0
+        padding: 10px 25px
+        float: right
+        font-family: $sans
+        transition: all 0.3s
+        +up-bold
+
+        &:hover
+            background-color: #5394DF
+
