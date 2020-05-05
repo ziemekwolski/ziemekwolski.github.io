@@ -1,5 +1,38 @@
-<ul>
-  {% for item in site.data.navigation %}
-    <li><a href="{{ item.link }}">{{ item.title }}</a></li>
-  {% endfor %}
-</ul>
+<nav class='panel' id='menu' role='navigation' style='display: none;'>
+  <ul>
+    {% for item in site.data.navigation %}
+      <li>
+        <i class='fa fa-{{ item.icon }}'></i>
+        <a href="{{ item.link }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+
+<!-- li>
+<i class='fa fa-bookmark'></i>
+<a href="/about-me">About</a>
+</li>
+<li>
+<i class='fa fa-tag'></i>
+<a href="/categories/Productivity">Productivity</a>
+</li>
+<li>
+<i class='fa fa-tag'></i>
+<a href="/categories/Bash">Bash Commands</a>
+</li>
+<li>
+<i class='fa fa-tag'></i>
+<a href="/categories/Swift">Swift</a>
+</li>
+<li>
+<i class='fa fa-tag'></i>
+<a href="/categories/ruby">Ruby</a>
+</li>
+<li>
+<i class='fa fa-tag'></i>
+<a href="/categories/PostgreSQL">PostgreSQL</a>
+</li>
+<hr -->
+

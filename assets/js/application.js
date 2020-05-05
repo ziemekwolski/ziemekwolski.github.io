@@ -12,12 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require bootstrap
 //= require bigslide
 //= require fastclick.min
 //= require modernizr.custom.min
 //= require retina.min.js
 //= require_tree ./main
+
+
 
 $(document).ready(function() {
   $('pre code').each(function(i, block) {
