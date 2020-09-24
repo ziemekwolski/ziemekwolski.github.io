@@ -1,10 +1,8 @@
 ---
 layout: post
 title: SQL Joins Explained visually
-excerpt_separator: <!--more-->
+excerpt: A 45 second visual explanation of joins
 ---
-A 45 second visual explanation of joins
-<!--more-->
 
 # SQL Joins Explained visually
 
