@@ -31,6 +31,22 @@
             <a class="select-posts active" href="#">Posts</a>
             <a class="select-categories" href="#">Categories</a>
           </div>
+          <div class="home-page-categories animated fadeIn hide">
+            <div class="category row">
+              <section>
+                {% for category in site.categories %}
+                  <div class="category-preview col-xs-6 col-sm-4">
+                    <h2>{{ category.name }}</h2>
+                    <a href="/categories/Productivity">
+                      <img alt="category-image" src="">
+                    </a>
+                  </div>
+                {% endfor %}
+
+              </section>
+            </div>
+          </div>
+
           <div class='home-page-posts animated fadeIn'>
             {% for post in site.posts %}
               <article class='post'>
@@ -39,7 +55,7 @@
                   <p>{{ post.excerpt }}</p>
                   <p class='meta'>
                     In <a href="/categories/PostgreSQL">PostgreSQL</a>
-                    <i class='link-spacer'></i>By Ziemek
+                    <i class='link-spacer'></i>By {{ post.author }}
                     <i class='link-spacer'></i>{{ post.date | date_to_long_string }}
                   </p>
                 </div>
