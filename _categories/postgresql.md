@@ -1,4 +1,5 @@
 ---
+layout: categories
 name: PostgreSQL
 image_url: /assets/images/category-1.jpg
 ---

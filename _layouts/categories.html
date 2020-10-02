@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class='no-js' lang='en'>
+  <head>
+    {% include meta.html %}
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="/assets/js/plugins/jquery-3.5.0.slim.js"></script>
+    <script src="/assets/js/plugins/fontawesome-v5.13.0.min.js"></script>
+    <script src="/assets/js/plugins/bootstrap-v3.3.7.min.js"></script>
+    <script src="/assets/js/plugins/bigSlide-v0.12.0.min.js"></script>
+    <script src="/assets/js/plugins/fastclick-v1.0.6.min.js"></script>
+    <script src="/assets/js/plugins/modernizr.custom-v2.8.3.min.js"></script>
+    <script src="/assets/js/plugins/retina-v1.3.0.min.js"></script>
+    <script src="/assets/js/main/theme.js"></script>
+  </head>
+  <body>
+    {% include navigation.html %}
+    <main class='container left-container'>
+      <div class='row'>
+        <section class='sidebar col-md-5 col-sm-12' style='background-image: url(https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/031/square_1440/photo-1462733441571-9312d0b53818.jpeg?1464578655);'>
+          {% include menu-trigger.html %}
+          <div class='site-info'>
+            <div class='primary-info'>
+              <h1>Productivity</h1>
+              <p>Productivity</p>
+            </div>
+          </div>
+          <div class='image-author'>Image by: <a href="https://unsplash.com/@cieloadentro">Roksolana Zasiadko</a></div>
+        </section>
+        <section class='col-md-7 col-sm-12 col-md-offset-5 main-content'>
+          <div class='row'>
+            <div class='sub-nav'>
+              <a class='select-posts active' href='#'>Posts</a>
+              <a class='select-categories' href='#'>Other Categories</a>
+            </div>
+            <div class='home-page-posts animated fadeIn'>
+              {{ content }}
+              <article class='post'>
+                <div class='post-preview col-xs-10 no-gutter'>
+                  <h2><a href="/Am-I-a-real-developer">Am I a real developer?</a></h2>
+                  <p>How to deal with imposter syndrome, accelerate learning and build relationships.</p>
+                  <p class='meta'>
+                    In <a href="/categories/Productivity">Productivity</a>
+                    <i class='link-spacer'></i>
+                    By Ziemek
+                    <i class='link-spacer'></i>
+                    February 24, 2017
+                  </p>
+                </div>
+                <div class='col-xs-2 no-gutter'>
+                  <img alt='Ziemek' class='user-icon user-1' src='https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/010/square_200/Z0069.JPG?1454645894'>
+                </div>
+              </article>
+            </div>
+            <div class='home-page-categories hide animated fadeIn'>
+              <div class='category row'>
+                <section>
+                  {% for category in site.categories %}
+                    <div class="category-preview col-xs-6 col-sm-4">
+                      <h2>{{ category.name }}</h2>
+                      <a href="{{ category.url }}">
+                        <img alt="category-image" src="{{ category.image_url }}">
+                      </a>
+                    </div>
+                  {% endfor %}
+                </section>
+              </div>
+            </div>
+          </div>
+          <footer class='split-footer'>
+          </footer>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
