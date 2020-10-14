@@ -54,13 +54,13 @@
                   <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
                   <p>{{ post.excerpt }}</p>
                   <p class='meta'>
-                    In <a href="/categories/PostgreSQL">PostgreSQL</a>
+                    In <a href="{{ post.category_url }}">{{ post.category }}</a>
                     <i class='link-spacer'></i>By {{ post.author }}
                     <i class='link-spacer'></i>{{ post.date | date_to_long_string }}
                   </p>
                 </div>
                 <div class='col-xs-2 no-gutter'>
-                  <img alt='Ziemek' class='user-icon user-1' src='https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/010/square_200/Z0069.JPG?1454645894'>
+                  <img alt='Ziemek' class='user-icon user-1' src='/assets/images/Z0069.jpg'>
                 </div>
               </article>
             {% endfor %}

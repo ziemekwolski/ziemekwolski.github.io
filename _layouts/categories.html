@@ -17,7 +17,7 @@
     {% include navigation.html %}
     <main class='container left-container'>
       <div class='row'>
-        <section class='sidebar col-md-5 col-sm-12' style='background-image: url(https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/031/square_1440/photo-1462733441571-9312d0b53818.jpeg?1464578655);'>
+        <section class='sidebar col-md-5 col-sm-12' style='background-image: url({{ page.image_url }});'>
           {% include menu-trigger.html %}
           <div class='site-info'>
             <div class='primary-info'>
@@ -25,7 +25,7 @@
               <p>Productivity</p>
             </div>
           </div>
-          <div class='image-author'>Image by: <a href="https://unsplash.com/@cieloadentro">Roksolana Zasiadko</a></div>
+          <div class='image-author'>Image by: <a href="{{ page.image_source }}">{{ page.image_author }}</a></div>
         </section>
         <section class='col-md-7 col-sm-12 col-md-offset-5 main-content'>
           <div class='row'>
