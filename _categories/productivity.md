@@ -6,4 +6,3 @@ image_url: /assets/images/category-1.jpg
 image_author: Roksolana Zasiadko
 image_source: https://unsplash.com/@cieloadentro
 ---
-Jane has worked on Jekyll for the past *five years*.

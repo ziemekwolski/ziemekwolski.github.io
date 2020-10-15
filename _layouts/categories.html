@@ -21,8 +21,8 @@
           {% include menu-trigger.html %}
           <div class='site-info'>
             <div class='primary-info'>
-              <h1>Productivity</h1>
-              <p>Productivity</p>
+              <h1>{{ page.name }}</h1>
+              <p>{{ page.subtitle }}</p>
             </div>
           </div>
           <div class='image-author'>Image by: <a href="{{ page.image_source }}">{{ page.image_author }}</a></div>
@@ -34,23 +34,23 @@
               <a class='select-categories' href='#'>Other Categories</a>
             </div>
             <div class='home-page-posts animated fadeIn'>
-              {{ content }}
-              <article class='post'>
-                <div class='post-preview col-xs-10 no-gutter'>
-                  <h2><a href="/Am-I-a-real-developer">Am I a real developer?</a></h2>
-                  <p>How to deal with imposter syndrome, accelerate learning and build relationships.</p>
-                  <p class='meta'>
-                    In <a href="/categories/Productivity">Productivity</a>
-                    <i class='link-spacer'></i>
-                    By Ziemek
-                    <i class='link-spacer'></i>
-                    February 24, 2017
-                  </p>
-                </div>
-                <div class='col-xs-2 no-gutter'>
-                  <img alt='Ziemek' class='user-icon user-1' src='https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/010/square_200/Z0069.JPG?1454645894'>
-                </div>
-              </article>
+              {% assign filtered_posts = site.posts | where: 'category', page.name %}
+              {% for post in filtered_posts %}
+                <article class='post'>
+                  <div class='post-preview col-xs-10 no-gutter'>
+                    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                    <p>{{ post.excerpt }}</p>
+                    <p class='meta'>
+                      In <a href="{{ post.category_url }}">{{ post.category }}</a>
+                      <i class='link-spacer'></i>By {{ post.author }}
+                      <i class='link-spacer'></i>{{ post.date | date_to_long_string }}
+                    </p>
+                  </div>
+                  <div class='col-xs-2 no-gutter'>
+                    <img alt='Ziemek' class='user-icon user-1' src='/assets/images/Z0069.jpg'>
+                  </div>
+                </article>
+              {% endfor %}
             </div>
             <div class='home-page-categories hide animated fadeIn'>
               <div class='category row'>
