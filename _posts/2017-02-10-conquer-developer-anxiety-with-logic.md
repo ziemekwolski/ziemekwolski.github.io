@@ -6,6 +6,7 @@ author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
 ---
+# Conquer developer anxiety with logic
 
 Have you ever sat down at your computer and wondered “How am I ever going to make this work?” You check your email just to avoid the hard task of thinking about it. “I’ll get started in a little bit; I just need some coffee,” you tell yourself. Meanwhile, the task at hand is not getting any easier.
 
