@@ -7,6 +7,7 @@ category: Ruby
 category_url: /categories/ruby.html
 ---
 # Organizing Ruby on Rails Models
+
 ## The Challenge
 
 A few years ago, I remember trying to get developers to work with a particular style when working with models. Placing Class methods before instance methods, making sure that constants appear that the top and so forth.
