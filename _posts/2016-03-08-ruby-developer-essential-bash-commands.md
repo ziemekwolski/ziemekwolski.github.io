@@ -3,8 +3,8 @@ layout: post
 title: Ruby Developer - Essential Bash commands
 excerpt: Most of us, Ruby programmers, know Ruby pretty well, but how well do you know your console. In this series we dive into improving your bash skills.
 author: Ziemek
-category: Ruby
-category_url: /categories/ruby.html
+category: Bash Commands
+category_url: /categories/bash_commands.html
 ---
 # Ruby Developer - Essential Bash commands
 
