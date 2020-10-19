@@ -66,5 +66,8 @@
 .highlight .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
 
 /* custom addition */
-.highlight pre { padding: 20px; }
+.highlight pre {
+  color: #75715e;
+  padding: 20px;
+}
 /* END custom addition */
