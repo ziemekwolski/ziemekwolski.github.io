@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Usage: make sure that your post is in the _posts folder. 
+ls -1 ./_posts/ | sed -e "s/\.md//" | sed -e "s/^/mkdir -p assets\/images\/posts\//" | bash
+
