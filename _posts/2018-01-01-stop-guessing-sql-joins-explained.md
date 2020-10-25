@@ -5,6 +5,7 @@ excerpt: Still guessing the correct SQL JOIN? Rewriting queries multiple times? 
 author: Ziemek
 category: PostgreSQL
 category_url: /categories/postgre_sql.html
+seo_keywords: postgresql, postres, joins, explained
 ---
 # Stop guessing, SQL joins explained
 

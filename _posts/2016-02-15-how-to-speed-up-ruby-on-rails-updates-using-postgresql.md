@@ -5,6 +5,7 @@ excerpt: While working with Ruby on Rails, I sometimes need to update a set of f
 author: Ziemek
 category: Ruby
 category_url: /categories/ruby.html
+seo_keywords: Ruby on Rails, scaling, models
 ---
 # How to speed up Ruby on Rails updates using PostgreSQL
 

@@ -1,10 +1,11 @@
 ---
 layout: post
 title: Organizing Ruby on Rails Models
-excerpt: Getting everyone on your team to use the same structure within your models
+excerpt: Organizing Ruby on Rails models using comments. Get everyone on your team to use the same structure within your models.
 author: Ziemek
 category: Ruby
 category_url: /categories/ruby.html
+seo_keywords: Ruby, Ruby on Rails, Models, style
 ---
 # Organizing Ruby on Rails Models
 

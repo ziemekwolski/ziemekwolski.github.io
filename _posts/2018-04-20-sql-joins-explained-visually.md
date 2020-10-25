@@ -1,10 +1,11 @@
 ---
 layout: post
 title: SQL Joins Explained visually
-excerpt: A 45 second visual explanation of joins
+excerpt: A 45 second visual explanation of joins and how to easily understand them.
 author: Ziemek
 category: PostgreSQL
 category_url: /categories/postgre_sql.html
+seo_keywords: postgresql, postres, joins, visual
 ---
 
 # SQL Joins Explained visually

@@ -5,6 +5,7 @@ excerpt: Want to be more physically fit, learning something new or saving more m
 author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
+seo_keywords: building habits, developer
 ---
 # The 15 minute habit that could change your life
 

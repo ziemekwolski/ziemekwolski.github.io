@@ -5,6 +5,7 @@ excerpt: Have you ever sat down at your computer and wondered "How am I ever goi
 author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
+seo_keywords: Developer, anxiety, planning
 ---
 # Conquer developer anxiety with logic
 

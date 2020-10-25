@@ -5,6 +5,7 @@ excerpt: Most of us, Ruby programmers, know Ruby pretty well, but how well do yo
 author: Ziemek
 category: Bash Commands
 category_url: /categories/bash_commands.html
+seo_keywords: Ruby, Ruby on Rails, bash
 ---
 # Ruby Developer - Essential Bash commands
 
