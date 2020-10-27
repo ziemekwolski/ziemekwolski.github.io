@@ -6,7 +6,9 @@ author: Ziemek
 category: Ruby
 category_url: /categories/ruby.html
 seo_keywords: Ruby, Ruby on Rails, Models, style
-hero-image-url: /assets/images/posts/2016-06-01-organizing-ruby-on-rails-models/hero-image-1440x460.jpeg
+hero-image-url: /assets/images/posts/2016-06-01-organizing-ruby-on-rails-models/photo-1442512595331-e89e73853f31.jpeg
+hero-image-author: Karl Fredrickson
+hero-image-source: https://unsplash.com/kfred
 ---
 # Organizing Ruby on Rails Models
 

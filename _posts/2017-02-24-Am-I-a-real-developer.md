@@ -5,7 +5,8 @@ excerpt: How to deal with imposter syndrome, accelerate learning and build relat
 author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
-seo_keywords: developer, self doubt, imposter syndrome,
+seo_keywords: developer, self doubt, imposter syndrome
+hero-image-url: /assets/images/posts/2017-02-24-Am-I-a-real-developer/dandelion-flower.jpg
 ---
 
 # Am I a real developer?

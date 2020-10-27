@@ -6,6 +6,9 @@ author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
 seo_keywords: building habits, developer
+hero-image-url: /assets/images/posts/2016-02-05-the-15-minute-habit-that-could-change-your-life/photo-1458724338480-79bc7a8352e4.jpeg
+hero-image-author: Samuel Scrimshaw
+hero-image-source: https://unsplash.com/@samscrim
 ---
 # The 15 minute habit that could change your life
 

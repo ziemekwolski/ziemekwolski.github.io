@@ -19,6 +19,9 @@
   <body>
     {% include navigation.html %}
     <header class='hero-image' role='banner' style='background-image: url({{ page.hero-image-url }});'>
+      {% if page.hero-image-author %}
+        <div class="image-author">Image by: <a href="{{ page.hero-image-source }}">{{ page.hero-image-author }}</a></div>
+      {% endif %}
     </header>
     {% include menu-trigger.html %}
     <main class='container'>

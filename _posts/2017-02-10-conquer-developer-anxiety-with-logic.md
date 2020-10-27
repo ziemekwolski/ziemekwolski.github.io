@@ -6,6 +6,9 @@ author: Ziemek
 category: Productivity
 category_url: /categories/productivity.html
 seo_keywords: Developer, anxiety, planning
+hero-image-url: /assets/images/posts/2017-02-10-conquer-developer-anxiety-with-logic/new-zealand-mountains.jpg
+hero-image-author: Antoine Barrès
+hero-image-source: http://isorepublic.com/new-zealand-mountains/
 ---
 # Conquer developer anxiety with logic
 
