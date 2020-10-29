@@ -30,19 +30,19 @@
     </div>
   </div>
   <div class="row read-another-section">
-    <a href="/sql-joins-explained-visually">
+    {% assign filtered_posts = site.posts | sample: 6 %}
+    {% for post in filtered_posts %}
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 no-gutter read-another-container">
-        <div class="overlay"></div>
-        <img src="https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/052/square_800/jungwoo-hong-112133-unsplash.jpg?1524365042" alt="Jungwoo hong 112133 unsplash">
-        <h3 class="read-another">SQL Joins Explained visually</h3>
+        <a href="{{ post.url }}">
+          <div class="parent">
+            <div class="child" style="background-image: url({{ post.hero-image-url }})">
+              <span class="read-another">
+                <strong><h3>{{ post.title }}</h3></strong>
+              </span>
+            </div>
+          </div>
+        </a>
       </div>
-    </a>
-    <a href="/stop-guessing-sql-joins-explained">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 no-gutter read-another-container">
-        <div class="overlay"></div>
-        <img src="https://s3.amazonaws.com/zmwolski-uploads/uploads/files/000/000/046/square_800/jonathan-percy-515685-unsplash-trimmed.jpg?1524106485" alt="Jonathan percy 515685 unsplash trimmed">
-        <h3 class="read-another">Stop guessing, SQL joins explained</h3>
-      </div>
-    </a>
+    {% endfor %}
   </div>
 </footer>
