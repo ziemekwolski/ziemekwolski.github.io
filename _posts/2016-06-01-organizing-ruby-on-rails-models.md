@@ -22,13 +22,14 @@ Fast forward a few years into my career and I end up meeting a developer by the 
 
 He introduces this simple structure, for the models in our app:
 
-<p>
+<!-- <p>
   <video poster="/assets/images/posts/2016-06-01-organizing-ruby-on-rails-models/using-snippets-poster.png" width="640" class="screenshot" style="max-width: 100%;">
       <video width="320" height="240" controls>
     <source src="/assets/images/posts/2016-06-01-organizing-ruby-on-rails-models/using-snippets.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </p>
+ -->
 {% highlight ruby %}
 class User < ActiveRecord::Base
 
