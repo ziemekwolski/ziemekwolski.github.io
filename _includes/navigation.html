@@ -6,33 +6,11 @@
         <a href="{{ item.link }}">{{ item.title }}</a>
       </li>
     {% endfor %}
+    {% for category in site.categories %}
+      <li>
+        <i class='fa fa-tag'></i>
+        <a href="{{ category.url }}">{{ category.name }}</a>
+      </li>
+    {% endfor %}
   </ul>
 </nav>
-
-
-<!-- li>
-<i class='fa fa-bookmark'></i>
-<a href="/about-me">About</a>
-</li>
-<li>
-<i class='fa fa-tag'></i>
-<a href="/categories/Productivity">Productivity</a>
-</li>
-<li>
-<i class='fa fa-tag'></i>
-<a href="/categories/Bash">Bash Commands</a>
-</li>
-<li>
-<i class='fa fa-tag'></i>
-<a href="/categories/Swift">Swift</a>
-</li>
-<li>
-<i class='fa fa-tag'></i>
-<a href="/categories/ruby">Ruby</a>
-</li>
-<li>
-<i class='fa fa-tag'></i>
-<a href="/categories/PostgreSQL">PostgreSQL</a>
-</li>
-<hr -->
-
