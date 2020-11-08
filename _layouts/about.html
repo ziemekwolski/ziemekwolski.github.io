@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='{{ page.excerpt }}' name='description'>
+    <meta content='{{ page.seo_keywords }}' name='keywords'>
+    {% include meta.html %}
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    {% include javascript.html %}
+  </head>
+  <body>
+    {% include navigation.html %}
+    <header class='hero-image' role='banner' style='background-image: url({{ page.hero-image-url }});'>
+      {% if page.hero-image-author %}
+        <div class="image-author">Image by: <a href="{{ page.hero-image-source }}">{{ page.hero-image-author }}</a></div>
+      {% endif %}
+    </header>
+    {% include menu-trigger.html %}
+    <main class='container'>
+      <div class='row'>
+        <div class='col-xs-12 single-content'>
+          <div style="text-align:center;">
+            <img src="/assets/images/Z0069.JPG" style="border-radius: 50%; margin-bottom: 50px; margin-top: 50px;">
+          </div>
+          {{ content }}
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
