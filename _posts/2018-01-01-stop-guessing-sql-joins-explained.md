@@ -9,6 +9,7 @@ seo_keywords: postgresql, postres, joins, explained
 hero-image-url: /assets/images/posts/2018-01-01-stop-guessing-sql-joins-explained/jonathan-percy-515685-unsplash-trimmed.jpg
 hero-image-author: Jonathan Percy
 hero-image-source: https://unsplash.com/@jonathanpielmayer
+redirect_from: /stop-guessing-sql-joins-explained
 ---
 # Stop guessing, SQL joins explained
 

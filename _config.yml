@@ -4,3 +4,7 @@ collections:
   categories:
     output: true
 repository: "ziemekwolski/ziemekwolski.github.io"
+plugins:
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from

@@ -7,6 +7,7 @@ category: Bash Commands
 category_url: /categories/bash_commands.html
 seo_keywords: Ruby, Ruby on Rails, bash
 hero-image-url: /assets/images/posts/2016-03-08-ruby-developer-essential-bash-commands/DSC06938.jpg
+redirect_from: /Ruby-developer-essential-bash-commands
 ---
 # Ruby Developer - Essential Bash commands
 

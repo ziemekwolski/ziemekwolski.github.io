@@ -9,6 +9,7 @@ seo_keywords: postgresql, postres, joins, visual
 hero-image-url: /assets/images/posts/2018-04-20-sql-joins-explained-visually/jungwoo-hong-112133-unsplash.jpg
 hero-image-author: Jungwoo Hong
 hero-image-source: https://unsplash.com/photos/KZ2viQbBE8c
+redirect_from: /sql-joins-explained-visually
 ---
 
 # SQL Joins Explained visually

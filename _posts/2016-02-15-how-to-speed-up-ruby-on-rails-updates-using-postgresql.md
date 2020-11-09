@@ -7,6 +7,7 @@ category: Ruby
 category_url: /categories/ruby.html
 seo_keywords: Ruby on Rails, scaling, models
 hero-image-url: /assets/images/posts/2016-02-15-how-to-speed-up-ruby-on-rails-updates-using-postgresql/IMG_4985.jpg
+redirect_from: /3-how-to-speed-up-ruby-on-rails-updates-using-postgresql
 ---
 # How to speed up Ruby on Rails updates using PostgreSQL
 

@@ -9,6 +9,7 @@ seo_keywords: Developer, anxiety, planning
 hero-image-url: /assets/images/posts/2017-02-10-conquer-developer-anxiety-with-logic/new-zealand-mountains.jpg
 hero-image-author: Antoine Barrès
 hero-image-source: http://isorepublic.com/new-zealand-mountains/
+redirect_from: /conquer-developer-anxiety-with-logic
 ---
 # Conquer developer anxiety with logic
 
