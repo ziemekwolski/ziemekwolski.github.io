@@ -1,39 +1,39 @@
 ---
 ---
 // plugins
-@import "plugins/fontawesome-5.13.0-web/scss/regular"
-@import "plugins/fontawesome-5.13.0-web/scss/fontawesome"
-@import "plugins/fontawesome-5.13.0-web/scss/solid"
-@import "plugins/fontawesome-5.13.0-web/scss/brands"
-@import "plugins/bootstrap-3.3.7/bootstrap.min.css"
-@import "plugins/_mixins"
-@import "plugins/_type"
-@import "plugins/_animate"
+@use "plugins/fontawesome-5.13.0-web/scss/regular"
+@use "plugins/fontawesome-5.13.0-web/scss/fontawesome"
+@use "plugins/fontawesome-5.13.0-web/scss/solid"
+@use "plugins/fontawesome-5.13.0-web/scss/brands"
+@use "plugins/bootstrap-3.3.7/bootstrap.min.css"
+@use "plugins/mixins" as *
+@use "plugins/type"
+@use "plugins/animate"
 
 
 // includes
-@import "partials/_bootstrap-components"
-@import "partials/_shared"
-@import "partials/_menu"
-@import "partials/_sidebar"
+@use "partials/bootstrap-components"
+@use "partials/shared"
+@use "partials/menu"
+@use "partials/sidebar"
 
 //landing
-@import "partials/_landing"
+@use "partials/landing"
 
 // pages
-@import "partials/_main-content"
-@import "partials/_single"
-@import "partials/_favorites"
-@import "partials/_category"
-@import "partials/_contact"
-@import "partials/_author"
-@import "partials/_alt-home"
-@import "partials/_page-404"
+@use "partials/main-content"
+@use "partials/single"
+@use "partials/favorites"
+@use "partials/category"
+@use "partials/contact"
+@use "partials/author"
+@use "partials/alt-home"
+@use "partials/page-404"
 
-@import "partials/_mods"
-@import "plugins/_code_highlight"
+@use "partials/mods"
+@use "plugins/code_highlight"
 
-// @import "nojs"
+// @use "nojs"
 
 .left-container
     margin-left: 15px
