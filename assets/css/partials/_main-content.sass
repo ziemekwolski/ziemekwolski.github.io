@@ -110,6 +110,33 @@
 			color: #333
 			border-bottom: none
 
+.book-content
+	p
+		+breakpoint(xs)
+			+font-size(12)
+		+breakpoint(sm)
+			+font-size(16)
+		+breakpoint(md)
+			+font-size(18)
+
+	table
+		width: 100%
+		+font-size(18)
+		+breakpoint(xs)
+			+font-size(12)
+		+breakpoint(sm)
+			+font-size(20)
+		+breakpoint(md)
+			+font-size(21)
+
+	table td, table th
+		padding: 3px
+		border: solid 1px #ddd
+
+	table thead
+		background-color: #f2f2f2
+
+
 .single-content
 	table
 		margin: 20px 0px 20px 0px

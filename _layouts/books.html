@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class='no-js' lang='en'>
+  <head>
+    {% include meta.html %}
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    {% include javascript.html %}
+  </head>
+  <body>
+    {% include navigation.html %}
+    <div class='container left-container'>
+      <div class='row'>
+        <section class='sidebar col-md-5 col-sm-12' style='background-image: url({{ page.hero-image-url }});'>
+          {% include menu-trigger.html %}
+          <div class='site-info'>
+            <div class='primary-info'>
+              <p>{{ page.subtitle }}</p>
+            </div>
+          </div>
+          <div class='image-author'>Image by: <a href="{{ page.image_source }}">{{ page.image_author }}</a></div>
+        </section>
+
+        <main class='col-md-10 col-sm-12 col-md-offset-5 main-content'>
+          <div class='row'>
+            <div class='col-xs-12 book-content'>
+              <div class='logo'></div>
+                <p class='meta'>
+                  In <a href="{{ page.category_url }}">{{ page.category }}</a>
+                  <i class='link-spacer'></i> By {{ page.author }} <i class='link-spacer'></i>{{ page.date | date_to_long_string }}
+                  <img alt='Ziemek' class='user-icon user-1' src='/assets/images/Z0069.jpg'>
+                </p>
+                {{ content }}
+                {% include comments.html %}
+            </div>
+          </div>
+
+          {% include post-footer.html %}
+        </main>
+
+
+      </div>
+    </div>
+  </body>
+</html>

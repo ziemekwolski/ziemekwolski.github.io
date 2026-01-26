@@ -28,6 +28,19 @@
             </div>
             <div class='home-page-posts animated fadeIn'>
               {% assign filtered_posts = site.posts | where: 'category', page.name %}
+              {% if page.name == "Books" %}
+              <div class='category row'>
+                <section>
+                  {% for post in filtered_posts %}
+                    <div class="category-preview col-xs-6 col-sm-4">
+                      <a href="{{ post.url }}">
+                        <img alt="{{ post.title }}" src="{{ post.hero-image-url }}">
+                      </a>
+                    </div>
+                  {% endfor %}
+                </section>
+              </div>
+              {% else %}
               {% for post in filtered_posts %}
                 <article class='post'>
                   <div class='post-preview col-xs-10 no-gutter'>
@@ -44,6 +57,7 @@
                   </div>
                 </article>
               {% endfor %}
+              {% endif %}
             </div>
             <div class='home-page-categories hide animated fadeIn'>
               <div class='category row'>
