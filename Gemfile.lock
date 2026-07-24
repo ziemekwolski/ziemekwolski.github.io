@@ -79,7 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jekyll (= 4.4.1)
+  jekyll (~> 4.2)
   jekyll-redirect-from
   kramdown-parser-gfm (~> 1.1)
   webrick (~> 1.7)
