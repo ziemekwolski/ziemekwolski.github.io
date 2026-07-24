@@ -24,5 +24,5 @@ Here is my professional summary:
 - 10 promotions across various career levels
 - 20+ years of professional software engineering
 
-Feel free to follow me on <a href="https://twitter.com/ZiemekWolski">Twitter</a> or join my network on <a href="https://www.linkedin.com/in/ziemek-wolski-59a9781">Linkedin</a>.
+Feel free to follow me on <a href="https://twitter.com/ZiemekWolski">Twitter</a> or join my network on <a href="https://www.linkedin.com/in/ziemek-w-59a9781">Linkedin</a>.
 
