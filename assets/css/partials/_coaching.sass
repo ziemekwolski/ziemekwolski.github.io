@@ -1,0 +1,274 @@
+@use "../plugins" as *
+
+$coaching-navy : #1c2847
+$coaching-tint : #f4f6fb
+$coaching-border : #e3e7f1
+
+.coaching-page
+    background: #fff
+
+.coaching
+    h1,
+    h2,
+    h3
+        font-family: $sans
+        color: $coaching-navy
+
+    h2
+        +font-size(30)
+        margin: 0 0 40px
+        text-align: center
+
+        +breakpoint(sm)
+            +font-size(36)
+
+    h3
+        +font-size(23)
+        font-weight: 700
+        margin: 0 0 10px
+
+.coaching-wrap
+    max-width: 1100px
+    margin: 0 auto
+    padding: 0 20px
+
+.coaching-narrow
+    max-width: 760px
+
+.coaching-btn
+    display: inline-block
+    padding: 14px 28px
+    border: none
+    border-radius: 4px
+    background: $light-blue
+    color: #fff
+    font-family: $sans
+    font-weight: 700
+    +font-size(17)
+    transition: background 200ms
+
+    &:hover,
+    &:active,
+    &:focus
+        background: #2f47c4
+        color: #fff
+        border: none
+
+// Hero
+
+.coaching-hero
+    background: linear-gradient(135deg, $coaching-navy 0%, #2d4a8f 100%)
+    color: #fff
+    padding: 80px 0 60px
+
+    +breakpoint(md)
+        padding: 100px 0
+
+    h1
+        color: #fff
+        margin: 0 0 15px
+        letter-spacing: -1pt
+        line-height: 1.15
+        +font-size(36)
+
+        +breakpoint(sm)
+            +font-size(48)
+
+        +breakpoint(lg)
+            +font-size(56)
+
+.coaching-hero__inner
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 40px
+    text-align: center
+
+    +breakpoint(md)
+        flex-direction: row
+        gap: 60px
+        text-align: left
+
+.coaching-hero__photo
+    flex: 0 0 auto
+    width: 220px
+    height: 220px
+    overflow: hidden
+    border-radius: 50%
+    border: 6px solid rgba(255, 255, 255, 0.15)
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35)
+
+    +breakpoint(md)
+        width: 320px
+        height: 320px
+
+    img
+        display: block
+        width: 100%
+        height: 100%
+        object-fit: cover
+        object-position: 0 0
+        transform: scale(1.4)
+        transform-origin: 22% 18%
+
+.coaching-hero__lead
+    color: rgba(255, 255, 255, 0.8)
+    font-family: $sans
+    margin-bottom: 35px
+    +font-size(20)
+
+    +breakpoint(sm)
+        +font-size(24)
+
+// Sections
+
+.coaching-section
+    padding: 70px 0
+
+    +breakpoint(md)
+        padding: 90px 0
+
+.coaching-section--tinted
+    background: $coaching-tint
+
+.coaching-story
+    p
+        line-height: 1.75
+
+.coaching-callout
+    margin: 40px 0
+    padding: 5px 0 5px 25px
+    border-left: 4px solid $light-blue
+    font-family: $sans
+    font-weight: 700
+    color: $coaching-navy
+    line-height: 1.4
+    +font-size(22)
+
+    +breakpoint(sm)
+        +font-size(26)
+
+// Impact cards
+
+.coaching-cards
+    display: grid
+    grid-template-columns: 1fr
+    gap: 25px
+
+    +breakpoint(md)
+        grid-template-columns: repeat(3, 1fr)
+
+.coaching-card
+    background: #fff
+    border: 1px solid $coaching-border
+    border-radius: 8px
+    padding: 35px 30px
+    box-shadow: 0 2px 10px rgba(28, 40, 71, 0.05)
+
+    i,
+    svg
+        color: $light-blue
+        margin-bottom: 20px
+        +font-size(28)
+
+    p
+        margin: 0
+        line-height: 1.6
+        +font-size(18)
+
+// Steps
+
+.coaching-steps
+    list-style: none
+    padding: 0
+    margin: 0
+    display: grid
+    grid-template-columns: 1fr
+    gap: 40px
+
+    +breakpoint(md)
+        grid-template-columns: repeat(3, 1fr)
+
+    li
+        position: relative
+        padding-top: 25px
+        border-top: 3px solid $coaching-border
+
+    p
+        margin: 0
+        line-height: 1.6
+        +font-size(18)
+
+.coaching-steps__num
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    width: 44px
+    height: 44px
+    margin-bottom: 15px
+    border-radius: 50%
+    background: $light-blue
+    color: #fff
+    font-family: $sans
+    font-weight: 700
+    +font-size(20)
+
+// Checklist
+
+.coaching-checklist
+    list-style: none
+    padding: 0
+    margin: 0 auto
+    max-width: 900px
+    display: grid
+    grid-template-columns: 1fr
+    gap: 18px 40px
+
+    +breakpoint(sm)
+        grid-template-columns: repeat(2, 1fr)
+
+    li
+        position: relative
+        padding-left: 38px
+        line-height: 1.5
+        +font-size(18)
+
+        &::before
+            content: "✓"
+            position: absolute
+            left: 0
+            top: 1px
+            width: 24px
+            height: 24px
+            border-radius: 50%
+            background: $light-blue
+            color: #fff
+            font-family: $sans
+            font-weight: 700
+            text-align: center
+            line-height: 24px
+            +font-size(14)
+
+// Outcome + CTA
+
+.coaching-outcome
+    background: $coaching-navy
+    text-align: center
+
+    h2
+        color: #fff
+
+    p
+        color: rgba(255, 255, 255, 0.85)
+        margin: 0
+        line-height: 1.6
+        +font-size(20)
+
+        +breakpoint(sm)
+            +font-size(24)
+
+.coaching-cta
+    text-align: center
+
+    p
+        margin-bottom: 35px

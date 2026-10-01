@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='{{ page.excerpt }}' name='description'>
+    <meta content='{{ page.seo_keywords }}' name='keywords'>
+    {% include meta.html %}
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    {% include javascript.html %}
+  </head>
+  <body class='coaching-page'>
+    {% include navigation.html %}
+    {% include menu-trigger.html %}
+    <main class='coaching'>
+      {{ content }}
+    </main>
+  </body>
+</html>
