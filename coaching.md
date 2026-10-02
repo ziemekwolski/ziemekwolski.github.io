@@ -10,7 +10,7 @@ seo_keywords: Staff Engineer, promotion, career coaching, software engineer prom
 <section class="coaching-hero">
   <div class="coaching-wrap coaching-hero__inner">
     <div class="coaching-hero__photo">
-      <img src="/assets/images/about/Beach.jpeg" alt="Ziemek Wolski">
+      <img src="/assets/images/about/in-garden.jpeg" alt="Ziemek Wolski">
     </div>
     <div class="coaching-hero__text" markdown="1">
 
