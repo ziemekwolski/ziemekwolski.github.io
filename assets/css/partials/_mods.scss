@@ -26,6 +26,16 @@ header.hero-image {
     }
   }
 
+  a.coaching-btn {
+    margin-bottom: 30px;
+    color: #fff;
+    &:hover,
+    &:active,
+    &:focus {
+      color: #fff;
+    }
+  }
+
   pre {
     border: 0px;
     padding: 0px;
