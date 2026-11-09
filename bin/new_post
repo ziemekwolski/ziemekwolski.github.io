@@ -113,8 +113,20 @@ def remote?(source)
   source.match?(%r{\Ahttps?://})
 end
 
+# Accepts paths as typed or dragged in from Finder: quoted ('...' or "..."),
+# with backslash-escaped spaces, or starting with ~.
 def expand_local(source)
-  File.expand_path(source.sub(/\A~/, Dir.home), Dir.pwd)
+  path = source.strip
+  path = path[1..-2] if path.length > 1 && path[0] == path[-1] && %w[' "].include?(path[0])
+  path = path.gsub(/\\(.)/, '\1')
+  File.expand_path(path.sub(/\A~/, Dir.home), Dir.pwd)
+end
+
+# "My Photo (1).JPG" -> "my-photo-1.jpg", so the image URL has no spaces.
+def clean_filename(name)
+  ext  = File.extname(name).downcase
+  base = slugify(File.basename(name, File.extname(name)))
+  "#{base.empty? ? 'image' : base}#{ext}"
 end
 
 # Copies or downloads an image into the post's folder.
@@ -139,6 +151,7 @@ def store_image(source, image_dir, post_name, name: nil)
     end
     name ||= File.basename(path)
     name = "#{name}#{File.extname(path)}" if File.extname(name).empty?
+    name = clean_filename(name)
     target = File.join(image_dir, name)
     FileUtils.cp(path, target)
   end
@@ -210,7 +223,8 @@ excerpt  = ask("Excerpt (one or two sentences for the home page)", required: tru
 keywords = ask("SEO keywords (comma separated)", default: category.downcase)
 
 puts
-puts "Hero image: an Unsplash photo URL, any image URL, or a path to a file on disk."
+puts "Hero image: a file on your computer (type the path or drag the file in),"
+puts "an Unsplash photo URL, or any image URL. It is copied into the post's image folder."
 hero_source = ask("Hero image (leave blank to add one later)")
 hero_author = ""
 hero_link   = ""
@@ -253,6 +267,20 @@ unless hero_source.empty?
   puts "  + #{hero_url}" unless hero_url.empty?
 end
 
+extra_images = []
+puts
+puts "Other images for this post (one file path or URL per line, blank line when done):"
+loop do
+  source = ask("  Image")
+  break if source.empty?
+
+  stored = store_image(source, image_dir, post_name)
+  next unless stored
+
+  puts "  + #{stored}"
+  extra_images << stored
+end
+
 body = relocate_body_images(body, image_dir, post_name)
 body = keep_line_breaks(body) if line_breaks
 body = body.strip
@@ -284,6 +312,11 @@ File.write(post_path, content)
 
 puts "Wrote #{post_path.sub("#{ROOT}/", '')}"
 puts
+unless extra_images.empty?
+  puts "Paste these where you want the images in the post:"
+  extra_images.uniq.each { |url| puts "  ![](#{url})" }
+  puts
+end
 puts "Next steps:"
 puts "  - Drop any extra images into #{image_dir.sub("#{ROOT}/", '')}/"
 puts "    and reference them as ![alt](/assets/images/posts/#{post_name}/<file>)"
