@@ -1,0 +1,291 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Creates a new blog post for this Jekyll site.
+#
+# Asks a few questions, then writes:
+#   _posts/YYYY-MM-DD-<slug>.md
+#   assets/images/posts/YYYY-MM-DD-<slug>/   (hero image + any images used in the body)
+#
+# Usage:
+#   bin/new_post                 # paste the post text when asked
+#   bin/new_post draft.txt       # read the post text from a file
+#
+# Run it from anywhere; paths are resolved from the repo root.
+
+require "date"
+require "fileutils"
+require "uri"
+
+ROOT          = File.expand_path("..", __dir__)
+POSTS_DIR     = File.join(ROOT, "_posts")
+CATEGORY_DIR  = File.join(ROOT, "_categories")
+IMAGES_DIR    = File.join(ROOT, "assets", "images", "posts")
+AUTHOR        = "Ziemek"
+BOOK_A_CALL   = '<a class="coaching-btn" href="https://calendly.com/ziemek-wolski/30min">Book a call with me</a>'
+IMAGE_EXT     = /\.(jpe?g|png|gif|webp|svg|mp4)\z/i
+
+INPUT = $stdin
+
+# ---------------------------------------------------------------- prompts --
+
+def ask(question, default: nil, required: false)
+  loop do
+    hint = default && !default.to_s.empty? ? " [#{default}]" : ""
+    print "#{question}#{hint}: "
+    answer = INPUT.gets
+    abort("\nAborted.") if answer.nil?
+    answer = answer.strip
+    answer = default.to_s if answer.empty? && default
+    return answer unless required && answer.empty?
+
+    puts "  This one is required."
+  end
+end
+
+def yes?(question, default: true)
+  answer = ask("#{question} (#{default ? 'Y/n' : 'y/N'})")
+  return default if answer.empty?
+
+  answer.downcase.start_with?("y")
+end
+
+def choose(question, options)
+  puts question
+  options.each_with_index { |opt, i| puts "  #{i + 1}) #{opt}" }
+  loop do
+    answer = ask("Pick a number", required: true)
+    index = answer.to_i - 1
+    return options[index] if answer.match?(/\A\d+\z/) && index.between?(0, options.size - 1)
+
+    puts "  Enter a number between 1 and #{options.size}."
+  end
+end
+
+def read_multiline(question)
+  puts question
+  puts "  (Paste the text, then type END on its own line and press Enter.)"
+  lines = []
+  while (line = INPUT.gets)
+    break if line.strip == "END"
+
+    lines << line
+  end
+  lines.join
+end
+
+# ---------------------------------------------------------------- helpers --
+
+def slugify(text)
+  text.downcase
+      .tr("’'", "")
+      .gsub(/[^a-z0-9]+/, "-")
+      .gsub(/\A-+|-+\z/, "")
+end
+
+# YAML-safe scalar: quote when the value contains characters YAML would choke on.
+def yaml(value)
+  str = value.to_s
+  return str unless str.match?(/[:#\[\]{}&*!|>'"%@`,]|\A[-?\s]|\s\z/)
+
+  "\"#{str.gsub('\\', '\\\\\\\\').gsub('"', '\\"')}\""
+end
+
+# { "Productivity" => "productivity", ... } from the files in _categories/.
+def categories
+  Dir[File.join(CATEGORY_DIR, "*.md")].sort.each_with_object({}) do |path, map|
+    name = File.read(path)[/^name:\s*(.+)$/, 1]&.strip
+    map[name] = File.basename(path, ".md") if name
+  end
+end
+
+# Turns an Unsplash photo page URL into a direct download URL.
+def unsplash_download_url(url)
+  id = URI(url).path.split("/").last.to_s.split("-").last
+  "https://unsplash.com/photos/#{id}/download?force=true&w=1920"
+end
+
+def unsplash?(url)
+  url.match?(%r{\Ahttps?://(www\.)?unsplash\.com/photos/})
+end
+
+def remote?(source)
+  source.match?(%r{\Ahttps?://})
+end
+
+def expand_local(source)
+  File.expand_path(source.sub(/\A~/, Dir.home), Dir.pwd)
+end
+
+# Copies or downloads an image into the post's folder.
+# Returns the site path (/assets/images/posts/...) or nil when it fails.
+def store_image(source, image_dir, post_name, name: nil)
+  if remote?(source)
+    url = unsplash?(source) ? unsplash_download_url(source) : source
+    name ||= File.basename(URI(source).path)
+    name = "#{name}.jpg" unless name.match?(IMAGE_EXT)
+    target = File.join(image_dir, name)
+    ok = system("curl", "-sfL", "-A", "Mozilla/5.0", url, "-o", target)
+    unless ok && File.size?(target)
+      FileUtils.rm_f(target)
+      warn "  ! Could not download #{source}"
+      return nil
+    end
+  else
+    path = expand_local(source)
+    unless File.file?(path)
+      warn "  ! File not found: #{source}"
+      return nil
+    end
+    name ||= File.basename(path)
+    name = "#{name}#{File.extname(path)}" if File.extname(name).empty?
+    target = File.join(image_dir, name)
+    FileUtils.cp(path, target)
+  end
+  "/assets/images/posts/#{post_name}/#{name}"
+end
+
+# Finds ![alt](src) in the body. Local files and remote URLs are copied into
+# the post's image folder and the link is rewritten to point at the copy.
+# Links already pointing at /assets/... are left alone.
+def relocate_body_images(body, image_dir, post_name)
+  body.gsub(/!\[([^\]]*)\]\(([^)\s]+)\)/) do
+    alt, src = Regexp.last_match(1), Regexp.last_match(2)
+    if src.start_with?("/")  && !File.exist?(src)
+      "![#{alt}](#{src})"
+    else
+      stored = store_image(src, image_dir, post_name)
+      puts "  + #{stored}" if stored
+      "![#{alt}](#{stored || src})"
+    end
+  end
+end
+
+# LinkedIn-style text uses single line breaks for rhythm. Markdown joins those
+# lines, so end each one with <br> (blank lines between paragraphs stay).
+def keep_line_breaks(body)
+  paragraphs = body.strip.split(/\n\s*\n/)
+  paragraphs.map do |para|
+    lines = para.split("\n")
+    next para if lines.size == 1 || lines.first.match?(/\A\s*([-*+]|\d+\.|#|>|```|<)/)
+
+    lines.each_with_index.map { |l, i| i < lines.size - 1 ? "#{l.rstrip}<br>" : l }.join("\n")
+  end.join("\n\n")
+end
+
+# ------------------------------------------------------------------- main --
+
+body_file = ARGV.first
+if body_file && !File.file?(body_file)
+  abort "No such file: #{body_file}"
+end
+
+puts "New post for zmwolski.com"
+puts "-" * 40
+
+title = ask("Title", required: true)
+
+date = nil
+until date
+  input = ask("Publish date (YYYY-MM-DD)", default: Date.today.iso8601)
+  begin
+    date = Date.iso8601(input)
+  rescue Date::Error
+    puts "  Use the format YYYY-MM-DD."
+  end
+end
+
+slug = ask("URL slug", default: slugify(title))
+post_name = "#{date.iso8601}-#{slugify(slug)}"
+post_path = File.join(POSTS_DIR, "#{post_name}.md")
+image_dir = File.join(IMAGES_DIR, post_name)
+
+if File.exist?(post_path)
+  abort "\n#{post_path.sub("#{ROOT}/", '')} already exists. Pick another title, slug or date." unless yes?("#{post_name}.md already exists. Overwrite it?", default: false)
+end
+
+cats = categories
+category = choose("Category", cats.keys)
+excerpt  = ask("Excerpt (one or two sentences for the home page)", required: true)
+keywords = ask("SEO keywords (comma separated)", default: category.downcase)
+
+puts
+puts "Hero image: an Unsplash photo URL, any image URL, or a path to a file on disk."
+hero_source = ask("Hero image (leave blank to add one later)")
+hero_author = ""
+hero_link   = ""
+unless hero_source.empty?
+  hero_author = ask("Photographer / image author", default: unsplash?(hero_source) ? nil : AUTHOR)
+  hero_link   = ask("Image source URL (for the credit)", default: remote?(hero_source) ? hero_source : "")
+end
+
+puts
+body =
+  if body_file
+    puts "Using post text from #{body_file}"
+    File.read(body_file)
+  else
+    read_multiline("Post text (Markdown). Use ![alt](path/or/url) for images; they are copied in for you.")
+  end
+abort "No post text given." if body.strip.empty?
+
+line_breaks = yes?("Keep single line breaks as written (adds <br>, good for LinkedIn-style text)?", default: false)
+add_button  = yes?("Add the 'Book a call with me' button at the end?", default: false)
+
+# ---------------------------------------------------------------- write it --
+
+puts
+FileUtils.mkdir_p(image_dir)
+puts "Created #{image_dir.sub("#{ROOT}/", '')}/"
+
+hero_url = ""
+unless hero_source.empty?
+  hero_name = remote?(hero_source) ? "#{slugify(title)[0, 50]}-hero.jpg" : nil
+  hero_url = store_image(hero_source, image_dir, post_name, name: hero_name).to_s
+  while hero_url.empty?
+    puts "  The download was blocked (Unsplash often blocks scripts)."
+    puts "  Save the image in your browser, then give the file path here."
+    local = ask("  Hero image file (blank to skip)")
+    break if local.empty?
+
+    hero_url = store_image(local, image_dir, post_name).to_s
+  end
+  puts "  + #{hero_url}" unless hero_url.empty?
+end
+
+body = relocate_body_images(body, image_dir, post_name)
+body = keep_line_breaks(body) if line_breaks
+body = body.strip
+body = body.sub(/\A#\s+.*\n+/, "") # the template adds the title heading itself
+body += "\n\n#{BOOK_A_CALL}" if add_button
+
+category_url = "/categories/#{cats[category]}.html"
+
+content = <<~MD
+  ---
+  layout: post
+  title: #{yaml(title)}
+  excerpt: #{yaml(excerpt)}
+  author: #{AUTHOR}
+  category: #{yaml(category)}
+  category_url: #{category_url}
+  seo_keywords: #{yaml(keywords)}
+  hero-image-url: #{hero_url}
+  hero-image-author: #{yaml(hero_author)}
+  hero-image-source: #{hero_link}
+  ---
+
+  # #{title}
+
+  #{body}
+MD
+
+File.write(post_path, content)
+
+puts "Wrote #{post_path.sub("#{ROOT}/", '')}"
+puts
+puts "Next steps:"
+puts "  - Drop any extra images into #{image_dir.sub("#{ROOT}/", '')}/"
+puts "    and reference them as ![alt](/assets/images/posts/#{post_name}/<file>)"
+puts "  - Add a hero image later by filling in hero-image-url / -author / -source" if hero_url.empty?
+puts "  - Preview with: bundle exec jekyll serve"
