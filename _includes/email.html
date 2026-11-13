@@ -1,0 +1,9 @@
+{%- comment -%}
+  Spam-resistant email link. The address never appears in the HTML: the user
+  and domain are stored reversed, and site.js assembles the mailto link in the
+  browser. Without JavaScript, visitors see a short note instead.
+    {% include email.html %}               → hey@zmwolski.com
+    {% include email.html user="ziemek" %}
+{%- endcomment -%}
+{%- assign email_user = include.user | default: "hey" | split: "" | reverse | join: "" -%}
+<span class="email" data-email-user="{{ email_user }}" data-email-domain="moc.ikslowmz">(enable JavaScript to see the email address)</span>

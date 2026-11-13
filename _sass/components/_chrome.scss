@@ -1,0 +1,240 @@
+// Site chrome: logo, header/nav, footer.
+
+@use "../tools";
+
+// --- Logo:  zw. ---------------------------------------------------------------
+// Wordmark: "Ziemek Wolski" in italic display type, surname underlined
+// with a skewed accent stroke.
+//   <a class="logo" href="/">Ziemek <span class="logo__surname">Wolski</span></a>
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.23em;
+  padding-bottom: var(--space-2);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.25vw, 29px);
+  font-style: italic;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-logo);
+  line-height: 1.15;
+  white-space: nowrap;
+
+  @include tools.below("sm") {
+    gap: 0.17em;
+    font-size: 20px;
+  }
+}
+
+.logo__surname {
+  position: relative;
+  color: var(--color-accent);
+
+  &::after {
+    position: absolute;
+    right: 1%;
+    bottom: -4px;
+    left: 4%;
+    height: 3px;
+    border-radius: 6px;
+    background: var(--gradient-wordmark-underline);
+    transform: skewX(-24deg);
+    content: "";
+  }
+}
+
+// --- Header ------------------------------------------------------------------
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(225, 232, 246, 0.8);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-7);
+  height: var(--layout-header-height);
+
+  @include tools.below("sm") {
+    height: var(--layout-header-height-sm);
+  }
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--size-text-sm);
+  font-weight: var(--weight-semibold);
+
+  a:hover,
+  a[aria-current="page"] {
+    color: var(--color-accent);
+  }
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+// Menu toggle (only visible on small screens).
+.nav__toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+
+  span,
+  span::before,
+  span::after {
+    display: block;
+    width: 16px;
+    height: 2px;
+    margin-inline: auto;
+    border-radius: 2px;
+    background: currentColor;
+    content: "";
+    transition: transform var(--motion-fast);
+  }
+
+  span { position: relative; }
+  span::before { position: absolute; top: -5px; }
+  span::after { position: absolute; top: 5px; }
+
+  &[aria-expanded="true"] {
+    span { background: transparent; }
+    span::before { transform: translateY(5px) rotate(45deg); }
+    span::after { transform: translateY(-5px) rotate(-45deg); }
+  }
+}
+
+@include tools.below("md") {
+  .nav__toggle { display: inline-grid; place-items: center; }
+
+  .nav__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2) var(--layout-gutter) var(--space-6);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--size-text-md);
+
+    a {
+      display: block;
+      padding: var(--space-3) 0;
+    }
+  }
+
+  .nav--open .nav__links { display: flex; }
+}
+
+@include tools.below("sm") {
+  .nav__actions .btn {
+    padding: 11px 14px;
+    font-size: var(--size-text-xs);
+  }
+}
+
+// --- Footer ------------------------------------------------------------------
+.site-footer {
+  padding: var(--space-16) 0 var(--space-8);
+  background: var(--color-surface-footer);
+  color: var(--color-text-on-dark);
+
+  p {
+    max-width: 400px;
+    color: #9baac9;
+  }
+
+  .logo {
+    margin-bottom: var(--space-5);
+    color: var(--color-text-on-dark);
+    font-size: 27px;
+
+    .logo__surname { color: var(--color-accent-on-dark); }
+
+    @include tools.below("sm") { font-size: 24px; }
+  }
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-10);
+
+  @include tools.below("sm") {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+
+    > :first-child { grid-column: span 2; }
+  }
+}
+
+.site-footer__heading {
+  @include tools.label;
+  margin-bottom: var(--space-5);
+  color: #a0b1d0;
+}
+
+.site-footer__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    color: #c8d3ea;
+    font-size: var(--size-text-sm);
+
+    &:hover { color: var(--color-text-on-dark); }
+  }
+}
+
+.site-footer__bottom {
+  margin-top: var(--space-14);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.125);
+  color: #92a0bf;
+  font-size: 12px;
+}
+
+// Skip link for keyboard users.
+.skip-link {
+  @include tools.visually-hidden;
+
+  &:focus {
+    position: fixed !important;
+    top: var(--space-3);
+    left: var(--space-3);
+    z-index: 200;
+    width: auto;
+    height: auto;
+    padding: var(--space-3) var(--space-4);
+    clip: auto;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+  }
+}

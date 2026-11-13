@@ -1,0 +1,20 @@
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="container nav" aria-label="Main navigation" data-nav>
+    <a class="logo" href="/" aria-label="Ziemek Wolski home">Ziemek <span class="logo__surname">Wolski</span></a>
+    <ul class="nav__links" id="nav-links">
+      {%- for item in site.data.navigation.main %}
+      {%- assign active = false %}
+      {%- if page.url contains item.url %}{% assign active = true %}{% endif %}
+      {%- if page.layout == "post" and item.url == "/insights/" %}{% assign active = true %}{% endif %}
+      <li><a href="{{ item.url }}"{% if active %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+      {%- endfor %}
+    </ul>
+    <div class="nav__actions">
+      {% include button.html url="/coaching-call/" label="Book a coaching call" icon="↗" %}
+      <button class="nav__toggle" type="button" aria-controls="nav-links" aria-expanded="false" data-nav-toggle>
+        <span></span><span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </nav>
+</header>

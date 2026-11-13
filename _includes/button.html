@@ -1,0 +1,6 @@
+{%- comment -%}
+  Button component.
+  {% include button.html url="/program/" label="Explore coaching" variant="outline" icon="→" %}
+  variant: (none) | outline | light
+{%- endcomment -%}
+<a class="btn{% if include.variant %} btn--{{ include.variant }}{% endif %}" href="{{ include.url }}">{{ include.label }}{% if include.icon %} <span class="btn__icon" aria-hidden="true">{{ include.icon }}</span>{% endif %}</a>

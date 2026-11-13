@@ -1,0 +1,104 @@
+---
+layout: page
+title: Program
+permalink: /program/
+redirect_from:
+  - /coaching
+  - /coaching.html
+description: One-to-one coaching for experienced software engineers. Work through real challenges and turn them into practical actions you can use in your role.
+eyebrow: One-to-one coaching for experienced engineers
+heading: A clearer path forward,
+heading_accent: built around your work.
+lede: Coaching gives you space to step back, work through real challenges, and make deliberate progress. Together, we'll turn the situations you're facing into practical actions you can use in your role.
+hero_actions:
+  - { url: /coaching-call/, label: Book a coaching call, icon: "↗" }
+  - { url: "#roadmap", label: Explore the approach, variant: outline, icon: "↓" }
+---
+<section class="section">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Who it's for</p>
+      <h2>You're ready to grow. You need a clearer way forward.</h2>
+      <p class="lede">For experienced software engineers navigating the challenges that come with growing responsibility.</p>
+      <p>Your goals might involve a promotion, more technical leadership, or simply a better way to navigate your work. We'll start with what matters to you.</p>
+    </div>
+    <div class="panel">
+      <h3>This may be a fit if you want to…</h3>
+      <ul class="check-list">
+        <li>Feel more confident in your judgment and contributions</li>
+        <li>Get clearer on priorities and handle a demanding workload</li>
+        <li>Navigate feedback, manager relationships, or difficult conversations</li>
+        <li>Grow into technical leadership while staying close to engineering</li>
+        <li>Prepare for a promotion or decide what you want your next step to be</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle" id="roadmap">
+  <div class="container">
+    {% include section-intro.html eyebrow="How the work unfolds" heading="A practical approach, tailored to you." body="We'll revisit these steps as your goals and circumstances change." %}
+    <ol class="timeline">
+      {%- for row in site.data.coaching.roadmap %}
+      <li class="timeline__row">
+        <span class="timeline__number">0{{ forloop.index }}</span>
+        <div>
+          <h3>{{ row.title }}</h3>
+          <p>{{ row.body }}</p>
+        </div>
+        <div class="timeline__focus"><strong>Focus</strong>{{ row.focus }}</div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="What we can work on" heading="More than a career plan." %}
+    <div class="grid grid--3">
+      {%- for topic in site.data.coaching.topics %}
+      <div class="card">
+        <span class="card__label">{{ topic.label }}</span>
+        <h3>{{ topic.title }}</h3>
+        <p>{{ topic.body }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">The outcome</p>
+      <h2>Progress that matters to you.</h2>
+      <p class="lede">The goal isn't a particular title at any cost. It's to help you approach your work and career with greater clarity, confidence, and intention.</p>
+      <p>If advancement is your goal, we can work on understanding expectations, gathering evidence of impact, and preparing for review conversations. Your employer controls promotion decisions and timing.</p>
+    </div>
+    <div class="panel">
+      <h3>Depending on your goals, we might work on…</h3>
+      <ul class="check-list">
+        <li>A clearer set of priorities</li>
+        <li>A plan for a difficult conversation</li>
+        <li>Ways to communicate your work and decisions</li>
+        <li>Practical habits for focus and reflection</li>
+        <li>A strategy for career growth or promotion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="Common questions" heading="Before we talk." %}
+    <div class="faq">
+      {%- for item in site.data.coaching.faq %}
+      <details class="faq__item">
+        <summary>{{ item.q }}</summary>
+        <p>{{ item.a }}</p>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

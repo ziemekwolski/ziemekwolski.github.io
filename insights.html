@@ -1,0 +1,32 @@
+---
+layout: page
+title: Insights
+permalink: /insights/
+redirect_from:
+  - /categories/productivity.html
+  - /categories/ruby.html
+  - /categories/bash_commands.html
+  - /categories/postgre_sql.html
+  - /categories/books.html
+description: Writing on confidence, communication, career growth, sustainable work, and engineering.
+eyebrow: Ideas for engineers who want to grow
+heading: Better thinking.
+heading_accent: Better career moves.
+lede: Perspectives on confidence, communication, career growth, sustainable work, and engineering in the age of AI.
+---
+{%- assign categories = site.posts | map: "category" | uniq | sort -%}
+<section class="section">
+  <div class="container">
+    <ul class="chips" data-filter="#articles" aria-label="Filter by topic" hidden>
+      <li><button class="chip" type="button" data-category-filter="all" aria-pressed="true">All</button></li>
+      {%- for category in categories %}
+      <li><button class="chip" type="button" data-category-filter="{{ category | slugify }}" aria-pressed="false">{{ category }}</button></li>
+      {%- endfor %}
+    </ul>
+    <div class="grid grid--3" id="articles">
+      {%- for post in site.posts %}
+      {% include article-card.html post=post %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,182 @@
+// Prose: long-form Markdown content (blog posts, legal pages).
+// Styles plain elements because authors write Markdown, not classes.
+
+@use "../tools";
+
+.prose {
+  max-width: var(--layout-measure);
+  margin-inline: auto;
+  color: var(--color-text);
+  font-size: var(--size-text-lg);
+
+  p,
+  li {
+    color: #2b3a5b;
+    line-height: var(--leading-relaxed);
+  }
+
+  > * + * { margin-top: var(--space-6); }
+  p, ul, ol { margin-bottom: 0; }
+
+  h1, h2 {
+    margin: var(--space-14) 0 var(--space-5);
+    font-size: clamp(1.75rem, 3vw, 2.3rem);
+  }
+
+  h3 {
+    margin: var(--space-10) 0 var(--space-4);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  }
+
+  h4 {
+    margin: var(--space-8) 0 var(--space-3);
+    font-size: 1.15rem;
+  }
+
+  // Inline Markdown links only. Components placed inside prose (e.g. the
+  // author box's .btn) keep their own styling.
+  a:not(.btn) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+
+    &:hover { text-decoration-thickness: 2px; }
+  }
+
+  ul, ol { padding-left: var(--space-6); }
+  li + li { margin-top: var(--space-2); }
+
+  strong { color: var(--color-text); }
+
+  blockquote {
+    margin-inline: 0;
+    padding-left: var(--space-5);
+    border-left: 3px solid var(--color-accent);
+
+    p { color: #2b3a5b; }
+  }
+
+  img {
+    margin-inline: auto;
+    border-radius: var(--radius-md);
+  }
+
+  hr {
+    margin-block: var(--space-12);
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--size-text-sm);
+  }
+
+  th, td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  // Inline code
+  :not(pre) > code {
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+    background: var(--color-surface-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  // Code blocks (Rouge)
+  pre {
+    overflow-x: auto;
+    margin: 0;
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-footer);
+    color: #e3e9f4;
+    font: 0.875rem / 1.7 var(--font-mono);
+  }
+
+  figure.highlight { margin-inline: 0; }
+
+  @include tools.below("sm") {
+    font-size: 1.0625rem;
+  }
+}
+
+// Full container width, left-aligned with other page content (legal pages).
+.prose--full {
+  max-width: none;
+  margin-inline: 0;
+}
+
+// Emphasised paragraph inside prose.
+.prose .highlight-text,
+.highlight-text {
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--color-accent);
+  color: #2b3a5b;
+}
+
+// --- Post furniture ----------------------------------------------------------
+.post-hero-image {
+  margin: 0 0 var(--space-12);
+
+  img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+  }
+
+  figcaption {
+    margin-top: var(--space-3);
+
+    a { text-decoration: underline; text-underline-offset: 2px; }
+  }
+}
+
+.post-comments {
+  margin-top: var(--space-12);
+}
+
+// Quiet "Show comments" prompt shown before Disqus is loaded.
+.comments-gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+
+  &[hidden] { display: none; }
+
+  // Beats .prose p / .prose a so the note stays quiet inside a post.
+  .meta {
+    margin: 0;
+    color: var(--color-text-muted);
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// --- Rouge syntax colours (dark, on brand) ----------------------------------
+.highlight {
+  .c, .ch, .cm, .c1, .cs, .cp, .cpf { color: #7d8db0; font-style: italic; } // comments
+  .k, .kc, .kd, .kn, .kp, .kr, .kt, .nb, .bp { color: #9b94ff; }            // keywords
+  .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .s1, .ss, .dl { color: #7ee0b5; } // strings
+  .m, .mb, .mf, .mh, .mi, .il, .mo { color: #ffb86b; }                       // numbers
+  .nc, .nn, .no { color: #25c4ed; }                                          // classes, constants
+  .nf, .fm { color: #93baff; }                                               // functions
+  .na, .nv, .vc, .vg, .vi, .vm, .nt { color: #f7a8d8; }                      // attributes, variables
+  .o, .ow, .p { color: #c8d3ea; }                                            // operators
+  .gp { color: #7d8db0; user-select: none; }                                 // shell prompt
+  .err { color: inherit; background: none; }
+}

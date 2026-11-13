@@ -1,0 +1,21 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <a class="logo" href="/" aria-label="Ziemek Wolski home">Ziemek <span class="logo__surname">Wolski</span></a>
+        <p>{{ site.description }}</p>
+      </div>
+      {%- for column in site.data.navigation.footer %}
+      <div>
+        <p class="site-footer__heading">{{ column.heading }}</p>
+        <ul class="site-footer__links">
+          {%- for link in column.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+    <div class="site-footer__bottom">© {{ site.time | date: "%Y" }} Ziemek Wolski</div>
+  </div>
+</footer>

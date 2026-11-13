@@ -1,0 +1,16 @@
+---
+# Front matter tells Jekyll to compile this file. The design system lives in /_sass.
+---
+
+// Layers, lowest to highest specificity:
+//   tokens     → design decisions as Sass maps → CSS custom properties
+//   tools      → mixins (no output)
+//   base       → element defaults
+//   layout     → container, section, grid, split
+//   components → reusable UI pieces (one file per family)
+//   utilities  → single-purpose overrides
+
+@use "base";
+@use "layout";
+@use "components";
+@use "utilities";

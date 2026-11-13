@@ -1,0 +1,11 @@
+{%- comment -%}
+  Eyebrow + heading + optional intro paragraph.
+  {% include section-intro.html eyebrow="The challenge" heading="…" body="…" %}
+{%- endcomment -%}
+<div class="section-intro">
+  <p class="eyebrow">{{ include.eyebrow }}</p>
+  <h2{% if include.id %} id="{{ include.id }}"{% endif %}>{{ include.heading }}</h2>
+  {%- if include.body %}
+  <p>{{ include.body }}</p>
+  {%- endif %}
+</div>

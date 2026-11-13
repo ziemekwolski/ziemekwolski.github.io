@@ -1,0 +1,12 @@
+{%- assign post = include.post -%}
+<a class="article-card" href="{{ post.url }}" data-category="{{ post.category | slugify }}">
+  {%- if post.hero-image-url %}
+  <div class="article-card__media"><img src="{{ post.hero-image-url }}" alt="" loading="lazy"></div>
+  {%- endif %}
+  <div class="article-card__body">
+    <p class="label mb-0">{{ post.category }} · {{ post.date | date: "%b %Y" }}</p>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+    <span class="text-link">Read article →</span>
+  </div>
+</a>

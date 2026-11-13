@@ -1,49 +1,55 @@
-<!doctype html>
-<html>
-  <head>
-    <meta content='{{ page.excerpt }}' name='description'>
-    <meta content='{{ page.seo_keywords }}' name='keywords'>
-    {% include meta.html %}
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    {% include javascript.html %}
-  </head>
-  <body>
-    {% include navigation.html %}
-    <header class='hero-image' role='banner' style='background-image: url({{ page.hero-image-url }});'>
+---
+layout: default
+---
+{%- comment -%}
+  Posts open with "# Title" in Markdown. The title is already in the hero,
+  so drop that first <h1> from the rendered body.
+{%- endcomment -%}
+{%- assign body = content | strip -%}
+{%- assign first4 = body | slice: 0, 4 -%}
+{%- if first4 == "<h1 " or first4 == "<h1>" -%}
+  {%- assign h1_end = body | split: "</h1>" | first | append: "</h1>" -%}
+  {%- assign body = body | remove_first: h1_end -%}
+{%- endif -%}
+<article>
+  <header class="page-hero page-hero--article">
+    <div class="container container--narrow">
+      <p class="eyebrow">{{ page.category }} · <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+      <h1 class="mb-0">{{ page.title }}</h1>
+    </div>
+  </header>
+
+  {% if page.hero-image-url %}
+  <div class="container container--narrow">
+    <figure class="post-hero-image">
+      <img src="{{ page.hero-image-url }}" alt="">
       {% if page.hero-image-author %}
-        <div class="image-author">Image by: <a href="{{ page.hero-image-source }}">{{ page.hero-image-author }}</a></div>
+      <figcaption class="meta">Photo by <a href="{{ page.hero-image-source }}">{{ page.hero-image-author }}</a></figcaption>
       {% endif %}
-    </header>
-    {% include menu-trigger.html %}
-    <main class='container'>
-      <div class='row'>
-        <div class='col-xs-12 single-content'>
-          <div class='logo'></div>
-            <p class='meta'>
-              In <a href="{{ page.category_url }}">{{ page.category }}</a>
-              <i class='link-spacer'></i> By {{ page.author }} <i class='link-spacer'></i>{{ page.date | date_to_long_string }}
-              <img alt='Ziemek' class='user-icon user-1' src='/assets/images/Z0069.jpg'>
-            </p>
-            {{ content }}
-            {% include comments.html %}
+    </figure>
+  </div>
+  {% endif %}
+
+  <div class="section section--flush-top">
+    <div class="container">
+      <div class="prose">
+        {{ body }}
+
+        <aside class="author-box" aria-label="About the author">
+          <img class="avatar" src="/assets/images/ziemek/portrait.png" alt="">
+          <div>
+            <strong>Ziemek Wolski</strong>
+            <p>Former Engineering Manager. I coach experienced software engineers through career growth, workplace challenges, and technical leadership.</p>
+            <div class="actions mt-6">
+              {% include button.html url="/coaching-call/" label="Talk about what you're navigating" icon="↗" %}
+            </div>
+          </div>
+        </aside>
+
+        <div class="post-comments">
+          {% include comments.html %}
         </div>
       </div>
-    </main>
-
-    {% include post-footer.html %}
-
-<!--     <main class='container left-container'>
-      <div class='row'>
-        <section class='sidebar col-md-5 col-sm-12' style="background-image: url('/assets/images/photo-trains.jpg');">
-          {% include menu-trigger.html %}
-          <div class='site-info'></div>
-          <div class="image-author">Image by: <a href="https://unsplash.com/photos/Q47eNv_UvfM">Dmitrii Vaccinium</a></div>
-        </section>
-        <section class="col-md-7 col-sm-12 col-md-offset-5 main-content">
-        </section>
-      </div>
-    </main>
- -->
-  </body>
-</html>
+    </div>
+  </div>
+</article>

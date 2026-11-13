@@ -1,0 +1,153 @@
+---
+layout: default
+title: Home
+description: One-to-one coaching for experienced software engineers who want to build confidence, communicate clearly, and make progress on their career.
+---
+<section class="hero">
+  <div class="container hero__grid">
+    <figure class="hero__portrait">
+      <img src="/assets/images/ziemek/portrait.png" width="1600" height="1066" alt="Portrait of Ziemek Wolski" fetchpriority="high">
+      <figcaption class="hero__tag">
+        <strong>Ziemek Wolski</strong>
+        <p class="meta">One-to-one coaching with a former Engineering Manager</p>
+      </figcaption>
+    </figure>
+
+    <div>
+      <p class="badge">✦ Coaching for experienced software engineers</p>
+      <h1>You're a good engineer. <span class="gradient-text">Work shouldn't feel this hard to navigate.</span></h1>
+      <p class="lede">I help experienced software engineers build confidence, communicate clearly, and move their careers forward through the challenges they're facing now.</p>
+      <ul class="check-list check-list--ticks hero__outcomes">
+        <li>Work more sustainably</li>
+        <li>Improve your next review</li>
+        <li>Prepare for a promotion</li>
+      </ul>
+      <div class="actions">
+        {% include button.html url="/coaching-call/" label="Book a coaching call" icon="↗" %}
+        {% include button.html url="/program/" label="Explore coaching" variant="outline" icon="→" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="The challenge" heading="The hardest part of engineering isn't always the code." body="As your responsibilities grow, the challenges change. You don't have to figure it all out alone." %}
+    <div class="grid grid--3">
+      <div class="card">
+        <span class="card__label">01 /</span>
+        <h3>Too many priorities.</h3>
+        <p>You're juggling competing demands and struggling to find time for focused work.</p>
+      </div>
+      <div class="card">
+        <span class="card__label">02 /</span>
+        <h3>Second-guessing yourself.</h3>
+        <p>Difficult feedback or past setbacks have made it harder to trust your judgment.</p>
+      </div>
+      <div class="card">
+        <span class="card__label">03 /</span>
+        <h3>Unclear next steps.</h3>
+        <p>You're ready for more responsibility, but unsure what growth should look like or how to make it sustainable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Start where you are</p>
+      <h2>Bring the challenge you're facing.</h2>
+      <p class="lede">We'll work through it together and identify a practical next step.</p>
+      <div class="actions">
+        {% include button.html url="/program/" label="Explore the coaching approach" variant="outline" icon="→" %}
+      </div>
+    </div>
+
+    <div class="note-card" aria-label="Examples of challenges to bring to coaching">
+      <div class="note-card__head">Your work, your goals <span aria-hidden="true">↗</span></div>
+      <ul class="note-card__body note-card__list">
+        <li>A difficult conversation.</li>
+        <li>A confusing review.</li>
+        <li>Too many priorities.</li>
+        <li>A decision you can't stop second-guessing.</li>
+      </ul>
+      <div class="note-card__tags">
+        <span class="pill">Clarity</span>
+        <span class="pill pill--secondary">Practical next steps</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="How I help" heading="Practical support for the work you're facing now." %}
+    <div class="grid grid--2">
+      <div class="card card--static">
+        <p class="eyebrow">Clarity &amp; confidence</p>
+        <h3>Find a way forward.</h3>
+        <ul>
+          <li>Make sense of feedback and competing priorities</li>
+          <li>Build confidence in your judgment</li>
+          <li>Protect focus and work more sustainably</li>
+        </ul>
+      </div>
+      <div class="card card--static card--highlight">
+        <p class="eyebrow">Communication &amp; growth</p>
+        <h3>Grow your impact.</h3>
+        <ul>
+          <li>Prepare for manager conversations and meetings</li>
+          <li>Explain decisions and trade-offs clearly</li>
+          <li>Take initiative and shape technical direction</li>
+          <li>Prepare for advancement if that's your goal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container">
+    {% include section-intro.html eyebrow="One-to-one coaching" heading="A clearer path forward, built around your work." body="We'll start with your situation, focus on what matters most, and turn real challenges into practical next steps." %}
+    <ol class="grid grid--4 list-reset">
+      {%- for step in site.data.coaching.steps %}
+      <li class="step">
+        <span class="card__label">{{ forloop.index | prepend: "0" }} / 0{{ forloop.length }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+    <div class="actions">
+      {% include button.html url="/program/" label="Explore the coaching approach" variant="outline" icon="→" %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">Career growth in the AI era</p>
+    <blockquote class="quote">AI may change how code gets written. <em>It doesn't eliminate the need for engineering judgment, influence, and leadership.</em></blockquote>
+    <p class="lede mt-6">The goal isn't to chase every tool. It's to make your professional value clearer as the industry evolves.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Your coach</p>
+      <h2>Engineering experience. A human approach.</h2>
+      <p class="lede">I'm Ziemek. As a former Engineering Manager, I've helped engineers navigate complicated work, tough decisions, and growing responsibilities.</p>
+      <p>My approach combines thoughtful questions and practical tools, tailored to your goals and the situations you're facing.</p>
+      <div class="actions">
+        {% include button.html url="/about/" label="More about me" variant="outline" icon="→" %}
+      </div>
+    </div>
+    <figure class="portrait portrait--landscape">
+      <img src="/assets/images/ziemek/at-desk.jpg" alt="Ziemek Wolski at his desk, thinking" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+{% include cta.html %}

@@ -1,0 +1,204 @@
+// Larger page blocks: callout (CTA), portrait, FAQ, booking embed, article cards.
+
+@use "../tools";
+
+// --- Callout -----------------------------------------------------------------
+.callout {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.4rem, 7vw, 4.7rem) clamp(1.5rem, 7vw, 4.7rem);
+  border-radius: var(--radius-2xl);
+  background: var(--gradient-callout);
+  color: var(--color-text-on-dark);
+
+  // Decorative ring.
+  &::after {
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 290px;
+    height: 290px;
+    border: 65px solid rgba(255, 255, 255, 0.094);
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  h2 { max-width: 740px; }
+  p { max-width: 640px; color: #e6efff; }
+  .btn { position: relative; z-index: 1; }
+}
+
+// --- Portrait ----------------------------------------------------------------
+// <figure class="portrait"><img …><figcaption class="portrait__caption">…</figcaption></figure>
+.portrait {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--gradient-portrait);
+  aspect-ratio: 4 / 5;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.portrait--landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.portrait__caption {
+  position: absolute;
+  left: var(--space-5);
+  bottom: var(--space-5);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+}
+
+// Small round avatar (article author box).
+.avatar {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// --- FAQ ---------------------------------------------------------------------
+.faq {
+  max-width: 860px;
+}
+
+.faq__item {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--color-border);
+
+  summary {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-size: 1.0625rem;
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::after {
+      flex: none;
+      color: var(--color-accent);
+      content: "+";
+      font-weight: var(--weight-medium);
+    }
+  }
+
+  &[open] summary::after { content: "–"; }
+
+  p { margin: var(--space-4) 0 0; }
+}
+
+// --- Booking embed -----------------------------------------------------------
+.booking {
+  @include tools.card;
+  overflow: hidden;
+  min-height: 700px;
+
+  .calendly-inline-widget {
+    width: 100%;
+    min-width: 280px;
+    height: 700px;
+  }
+}
+
+.booking__fallback {
+  padding: var(--space-8);
+  text-align: center;
+}
+
+// --- Article card ------------------------------------------------------------
+.article-card {
+  @include tools.card;
+  @include tools.lift;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.article-card__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: linear-gradient(130deg, #dbe6ff, #a9dff8);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.article-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-6);
+
+  .label { color: var(--color-accent); }
+
+  h3 {
+    margin: var(--space-3) 0;
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+
+  p { font-size: var(--size-text-sm); }
+
+  .text-link { margin-top: auto; }
+}
+
+// Filter chips above the grid.
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: var(--weight-semibold) var(--size-text-xs) var(--font-body);
+  cursor: pointer;
+
+  &:hover { color: var(--color-text); }
+
+  &[aria-pressed="true"] {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent-soft-text);
+  }
+}
+
+// --- Author box (end of article) --------------------------------------------
+.author-box {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  @include tools.card;
+
+  p { margin: var(--space-1) 0 0; font-size: var(--size-text-sm); }
+  strong { font-family: var(--font-display); font-size: 1.125rem; }
+}

@@ -1,0 +1,22 @@
+---
+layout: default
+---
+{%- comment -%}
+  Interior page: hero from front matter (eyebrow, heading, heading_accent, lede), then content.
+{%- endcomment -%}
+<section class="page-hero">
+  <div class="container">
+    {% if page.eyebrow %}<p class="eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1>{{ page.heading | default: page.title }}{% if page.heading_accent %} <span class="gradient-text">{{ page.heading_accent }}</span>{% endif %}</h1>
+    {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+    {% if page.hero_actions %}
+    <div class="actions">
+      {%- for action in page.hero_actions %}
+      {% include button.html url=action.url label=action.label variant=action.variant icon=action.icon %}
+      {%- endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{{ content }}
+{% unless page.hide_cta %}{% include cta.html %}{% endunless %}

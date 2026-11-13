@@ -1,0 +1,41 @@
+---
+layout: page
+title: Book a coaching call
+permalink: /coaching-call/
+description: Book a free 30-minute call to talk about what you're navigating at work and whether coaching is a good fit.
+eyebrow: Let's talk about what's next
+heading: Let's talk about
+heading_accent: what's happening at work.
+lede: Tell me what you're navigating, what you'd like to change, and where you feel stuck. We'll explore your goals and whether working together makes sense.
+hide_cta: true
+---
+<section class="section">
+  <div class="container split split--start split--sidebar">
+    <div>
+      <p class="eyebrow">What to expect</p>
+      <h2>A focused conversation about your career.</h2>
+      <p>We'll discuss the challenges you're facing, what you've tried, and where coaching could help you find a clearer way forward.</p>
+      <div class="panel mt-6">
+        <h3>This conversation may be useful if…</h3>
+        <ul class="check-list">
+          <li>You're an experienced software engineer navigating growing responsibilities</li>
+          <li>You're looking for support with confidence, communication, priorities, or career direction</li>
+          <li>You're considering a promotion or a move into technical leadership</li>
+          <li>You're interested in practical, one-to-one coaching</li>
+        </ul>
+      </div>
+      <p class="meta mt-6">This is a conversation about fit, not a promise of a particular outcome or a free coaching session.</p>
+    </div>
+
+    <div class="booking">
+      <div class="calendly-inline-widget" data-url="{{ site.booking_url }}?primary_color=315cf5&amp;text_color=101b35"></div>
+      <noscript>
+        <div class="booking__fallback">
+          <p>The calendar needs JavaScript.</p>
+          {% include button.html url=site.booking_url label="Open the booking page" icon="↗" %}
+        </div>
+      </noscript>
+    </div>
+  </div>
+</section>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>

@@ -1,0 +1,107 @@
+---
+layout: page
+title: Design system
+permalink: /design-system/
+noindex: true
+sitemap: false
+eyebrow: Internal reference
+heading: Design
+heading_accent: system.
+lede: Every token and component the site is built from, rendered by the real stylesheet. If it isn't here, it probably shouldn't be on a page.
+hide_cta: true
+---
+{%- assign swatches = "accent,accent-hover,accent-soft,text,text-muted,text-subtle,surface,surface-subtle,surface-raised,surface-dark,surface-footer,border,border-strong,secondary-soft,focus" | split: "," -%}
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="Tokens" heading="Color" body="Semantic roles from _sass/tokens. Components use var(--color-*) and never raw hex." %}
+    <div class="grid grid--4">
+      {%- for s in swatches %}
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div style="height:72px;background:var(--color-{{ s }});border-bottom:1px solid var(--color-border)"></div>
+        <p class="label" style="padding:12px 16px;margin:0">--color-{{ s }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container">
+    {% include section-intro.html eyebrow="Tokens" heading="Typography" body="Inter Tight for display, Inter for text, JetBrains Mono for labels." %}
+    <h1>Display XL / h1</h1>
+    <h2>Display LG / h2</h2>
+    <h3>Display SM / h3</h3>
+    <p class="lede">Lede: intro paragraph under a heading.</p>
+    <p>Body: default paragraph text in the muted colour.</p>
+    <p class="meta">Meta: small supporting copy.</p>
+    <p class="eyebrow">Eyebrow label</p>
+    <p><span class="gradient-text" style="font:600 2rem var(--font-display)">Gradient text accent</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="Components" heading="Buttons, pills, badge" %}
+    <div class="actions">
+      {% include button.html url="#" label="Primary" icon="↗" %}
+      {% include button.html url="#" label="Outline" variant="outline" icon="→" %}
+      <span class="callout" style="padding:16px;border-radius:16px">{% include button.html url="#" label="Light" variant="light" %}</span>
+    </div>
+    <div class="actions">
+      <span class="pill">Pill</span>
+      <span class="pill pill--secondary">Pill secondary</span>
+      <span class="badge mb-0">✦ Badge</span>
+      <button class="chip" type="button" aria-pressed="true">Chip active</button>
+      <button class="chip" type="button" aria-pressed="false">Chip</button>
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container">
+    {% include section-intro.html eyebrow="Components" heading="Cards &amp; panels" %}
+    <div class="grid grid--3">
+      <div class="card"><span class="card__label">.card</span><h3>Feature card.</h3><p>Lifts on hover.</p></div>
+      <div class="card card--static card--highlight"><span class="card__label">.card--highlight</span><h3>Highlight.</h3><p>Tinted comparison card.</p></div>
+      <div class="panel"><h3>.panel</h3><ul class="check-list"><li>Holds a list</li><li>No hover</li></ul><ul class="check-list check-list--ticks mt-6"><li>.check-list--ticks</li><li>Outcomes &amp; benefits</li></ul></div>
+    </div>
+    <ol class="grid grid--4 list-reset mt-8">
+      <li class="step"><span class="card__label">01 / 02</span><h3>.step</h3><p>Process step.</p></li>
+    </ol>
+    <ol class="timeline mt-8">
+      <li class="timeline__row"><span class="timeline__number">01</span><div><h3>.timeline__row</h3><p>Number, text and focus chip.</p></div><div class="timeline__focus"><strong>Focus</strong>Something specific</div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">.section--dark + .quote</p>
+    <blockquote class="quote">A statement. <em>With emphasis.</em></blockquote>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-intro.html eyebrow="Components" heading="FAQ" %}
+    <div class="faq">
+      <details class="faq__item"><summary>.faq__item uses native &lt;details&gt;</summary><p>No JavaScript required.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle">
+  <div class="container">
+    {% include section-intro.html eyebrow="Components" heading="Prose" body="Markdown posts render inside .prose." %}
+    <div class="prose">
+      <p>Paragraph with a <a href="#">link</a>, <strong>bold</strong> and <code>inline code</code>.</p>
+      <h2>Heading two</h2>
+      <blockquote><p>A blockquote.</p></blockquote>
+      <div class="highlight"><pre><code><span class="k">def</span> <span class="nf">hello</span>
+  <span class="nb">puts</span> <span class="s2">"world"</span>
+<span class="k">end</span></code></pre></div>
+    </div>
+  </div>
+</section>
+
+{% include cta.html %}

@@ -1,0 +1,66 @@
+// Text-level components: eyebrow, lede, meta, gradient text, pull quote.
+
+@use "../tools";
+
+// Small monospace label above headings.  <p class="eyebrow">The challenge</p>
+.eyebrow {
+  @include tools.label;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+
+.eyebrow--on-accent {
+  color: #c4e7ff;
+}
+
+// Generic mono label (card numbers, footer headings).
+.label {
+  @include tools.label;
+}
+
+// Intro paragraph under a page or section heading.
+.lede {
+  font-size: var(--size-text-xl);
+  line-height: var(--leading-body);
+  max-width: 620px;
+}
+
+// Small, quiet supporting copy.
+.meta {
+  color: var(--color-text-muted);
+  font-size: var(--size-text-xs);
+}
+
+.gradient-text {
+  background: var(--gradient-brand-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Large statement.  <blockquote class="quote">… <em>emphasis</em></blockquote>
+.quote {
+  font-family: var(--font-display);
+  font-size: var(--size-display-md);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-snug);
+  max-width: 970px;
+  margin: 0;
+
+  em {
+    font-style: normal;
+    color: #8ea7ff;
+  }
+}
+
+// Section heading block.
+.section-intro {
+  max-width: 760px;
+  margin-bottom: var(--space-10);
+
+  > p:last-child {
+    font-size: var(--size-text-lg);
+    margin-bottom: 0;
+  }
+}

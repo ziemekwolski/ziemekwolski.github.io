@@ -1,0 +1,91 @@
+// Button
+//   <a class="btn">Primary</a>
+//   <a class="btn btn--outline">Secondary</a>
+//   <a class="btn btn--light">On accent backgrounds</a>
+//   Optional trailing icon: <span class="btn__icon" aria-hidden="true">↗</span>
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-text-on-dark);
+  font: var(--weight-semibold) var(--size-text-sm) / 1.2 var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-fast),
+    background var(--motion-fast);
+
+  &:hover {
+    transform: translateY(-2px);
+    background: var(--color-accent-hover);
+    box-shadow: var(--shadow-button-hover);
+  }
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn--outline {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+  box-shadow: none;
+
+  &:hover {
+    background: var(--color-surface-subtle);
+    box-shadow: none;
+  }
+}
+
+.btn--light {
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  &:hover {
+    background: var(--color-surface-subtle);
+  }
+}
+
+.btn--sm {
+  padding: 11px 14px;
+  font-size: var(--size-text-xs);
+}
+
+.btn__icon {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+svg.btn__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+}
+
+// A row of buttons.
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+// Inline text link with arrow (cards, "read more").
+.text-link {
+  color: var(--color-accent);
+  font-size: var(--size-text-xs);
+  font-weight: var(--weight-bold);
+}

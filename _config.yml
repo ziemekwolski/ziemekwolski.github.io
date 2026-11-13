@@ -1,10 +1,32 @@
-sass:
-  sass_dir: assets/css
-collections:
-  categories:
-    output: true
+title: Ziemek Wolski
+description: Coaching experienced software engineers through career growth, workplace challenges, and greater technical leadership.
+url: "https://www.zmwolski.com"
 repository: "ziemekwolski/ziemekwolski.github.io"
+
+# Every "Book a coaching call" button goes to /coaching-call/, which embeds this.
+booking_url: "https://calendly.com/ziemek-wolski/30min"
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
 plugins:
   - jekyll-redirect-from
-whitelist:
-  - jekyll-redirect-from
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+exclude:
+  - bin
+  - domains.txt
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - DESIGN_SYSTEM.md
+  - vendor

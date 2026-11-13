@@ -1,0 +1,57 @@
+# Shared coaching content, so the home page and program page stay in sync.
+
+steps:
+  - title: Understand
+    body: Explore your goals, strengths, feedback, and current challenges.
+  - title: Prioritize
+    body: Identify the changes that would make the biggest difference.
+  - title: Practice
+    body: Work through real conversations, decisions, and projects.
+  - title: Adjust
+    body: Review what's working and adapt as your circumstances change.
+
+roadmap:
+  - title: Understand your situation.
+    body: We'll look at your goals, strengths, feedback, and the challenges you're facing.
+    focus: Context and clarity
+  - title: Choose what matters most.
+    body: Together, we'll identify the changes that would make the biggest difference in your work and career.
+    focus: Priorities and direction
+  - title: Practice in real situations.
+    body: Bring upcoming conversations, decisions, projects, or feedback. We'll work through them and agree on next steps.
+    focus: Actions you can use at work
+  - title: Reflect and adjust.
+    body: We'll review what's working, build on your progress, and adapt the plan as your circumstances change.
+    focus: Learning and continued progress
+
+topics:
+  - label: Confidence
+    title: Trust your judgment.
+    body: Work through self-doubt, reflect on feedback, and recognize the strengths you already bring.
+  - label: Communication
+    title: Have better conversations.
+    body: Prepare for meetings, discuss trade-offs, and communicate clearly with managers and colleagues.
+  - label: Priorities
+    title: Make space for focus.
+    body: Clarify competing demands and develop habits that support a more sustainable way of working.
+  - label: Leadership
+    title: Grow your influence.
+    body: Find opportunities to take initiative, shape technical decisions, and help your team succeed.
+  - label: Career growth
+    title: Plan your next step.
+    body: Explore what you want next and, if promotion is your goal, prepare for advancement conversations.
+  - label: Practice
+    title: Turn insight into action.
+    body: Try practical next steps between conversations, then reflect on what worked and what to adjust.
+
+faq:
+  - q: Do I need to be aiming for Staff Engineer?
+    a: No. Coaching is built around your goals, whether you want to pursue a promotion, grow as a technical leader, or navigate a challenge in your current role.
+  - q: Does coaching guarantee a promotion?
+    a: No. We can work on your readiness and promotion case, but your employer controls the decision and its timing.
+  - q: Will this mean more hours outside of work?
+    a: We'll look for practical opportunities within your existing role, though agreed reflection and follow-through may require some time.
+  - q: Where does AI fit in?
+    a: If it's relevant to your goals, we can discuss how AI affects your work and judgment. This isn't a program about mastering every new AI tool.
+  - q: How does enrollment work?
+    a: Start with a coaching call. We'll discuss your situation, fit, goals, and engagement details privately.

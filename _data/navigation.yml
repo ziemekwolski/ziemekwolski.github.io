@@ -1,9 +1,21 @@
-- title: Home
-  link: /
-  icon: home
-- title: Coaching
-  link: /coaching
-  icon: bookmark
-- title: Box Breathing
-  link: /box-breathing/
-  icon: wind
+# Primary navigation (header). The booking button is rendered separately.
+main:
+  - title: Program
+    url: /program/
+  - title: About
+    url: /about/
+  - title: Insights
+    url: /insights/
+
+# Footer link columns
+footer:
+  - heading: Explore
+    links:
+      - { title: The program, url: /program/ }
+      - { title: About Ziemek, url: /about/ }
+      - { title: Insights, url: /insights/ }
+      - { title: Box breathing, url: /box-breathing/ }
+  - heading: Let's talk
+    links:
+      - { title: "Book a coaching call ↗", url: /coaching-call/ }
+      - { title: Privacy, url: /privacy/ }

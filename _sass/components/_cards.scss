@@ -1,0 +1,230 @@
+// Cards and panels.
+//   .card              Numbered feature card (grid of 3).
+//   .card--highlight   Tinted variant (comparison pairs).
+//   .step              Process step with "01 / 04" counter.
+//   .panel             Bordered box holding a list.
+//   .timeline          Stacked rows: number | text | focus chip.
+//   .note-card         Tilted card listing example challenges (home, "Start where you are").
+//   .pill              Small tag.
+
+@use "../tools";
+
+// --- Card --------------------------------------------------------------------
+.card {
+  @include tools.card;
+  @include tools.lift;
+  padding: var(--space-8);
+
+  h3 { margin: var(--space-4) 0 var(--space-3); }
+  p { margin: 0; }
+  ul { margin: 0; padding-left: var(--space-5); color: var(--color-text); line-height: 2; }
+
+  @include tools.below("sm") {
+    padding: var(--space-6);
+  }
+}
+
+.card--static:hover {
+  transform: none;
+  border-color: var(--color-border);
+}
+
+.card--highlight {
+  background: var(--gradient-highlight-card);
+  border-color: var(--color-border-highlight);
+}
+
+// The mono number/label at the top of a card.
+.card__label {
+  font: var(--weight-medium) 12px var(--font-mono);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+// --- Step --------------------------------------------------------------------
+.step {
+  @include tools.card;
+  padding: var(--space-7);
+
+  h3 { margin: var(--space-10) 0 var(--space-2); }
+  p { margin: 0; font-size: var(--size-text-sm); }
+
+  @include tools.below("sm") {
+    h3 { margin-top: var(--space-5); }
+  }
+}
+
+// --- Panel -------------------------------------------------------------------
+.panel {
+  @include tools.card;
+  padding: var(--space-8);
+
+  h3 { margin-bottom: var(--space-4); }
+}
+
+.check-list {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-text-muted);
+  line-height: 2;
+}
+
+$tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E");
+
+// Ticked variant: outcomes / benefits. Inherits font size from context.
+//   <ul class="check-list check-list--ticks"><li>Work more sustainably</li></ul>
+.check-list--ticks {
+  display: grid;
+  gap: var(--space-2);
+  padding-left: 0;
+  line-height: var(--leading-snug);
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: calc(1.375em + var(--space-3));
+  }
+
+  // Soft accent circle…
+  li::before,
+  li::after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1.375em;
+    height: 1.375em;
+    transform: translateY(-50%);
+    content: "";
+  }
+
+  li::before {
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+  }
+
+  // …with an accent tick (SVG used as a mask so the colour stays a token).
+  li::after {
+    background: var(--color-accent);
+    -webkit-mask: $tick center / 62% no-repeat;
+    mask: $tick center / 62% no-repeat;
+  }
+}
+
+// --- Timeline ----------------------------------------------------------------
+.timeline {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.1fr;
+  gap: var(--space-8);
+  align-items: start;
+  padding: var(--space-8);
+  @include tools.card;
+  border-radius: var(--radius-lg);
+
+  h3 { margin: 0 0 var(--space-3); }
+  p { margin: 0; }
+
+  @include tools.below("md") {
+    grid-template-columns: 55px 1fr;
+    gap: var(--space-4);
+  }
+
+  @include tools.below("sm") {
+    grid-template-columns: 1fr;
+    padding: var(--space-6);
+  }
+}
+
+.timeline__number {
+  font: var(--weight-medium) 20px var(--font-mono);
+  color: var(--color-accent);
+}
+
+.timeline__focus {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: #eef3ff;
+  color: var(--color-text);
+  font-size: var(--size-text-xs);
+
+  strong { display: block; color: #304478; }
+
+  @include tools.below("md") { grid-column: 2; }
+  @include tools.below("sm") { grid-column: 1; }
+}
+
+// --- Note card ---------------------------------------------------------
+.note-card {
+  max-width: 470px;
+  margin: auto;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-float);
+  transform: rotate(-3deg);
+
+  @include tools.below("md") {
+    transform: rotate(-1deg);
+  }
+}
+
+.note-card__head {
+  padding: var(--space-2) var(--space-1) var(--space-5);
+  font-size: var(--size-text-xs);
+  font-weight: var(--weight-bold);
+
+  span { color: var(--color-accent); }
+}
+
+.note-card__body {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+
+  p:last-child { margin-bottom: 0; }
+}
+
+// A stack of short challenges, one per row.
+.note-card__list {
+  margin: 0;
+  padding-block: var(--space-2);
+  list-style: none;
+
+  li {
+    @include tools.display("text-xl");
+    padding-block: var(--space-4);
+    line-height: var(--leading-snug);
+  }
+
+  li + li { border-top: 1px solid var(--color-border); }
+}
+
+.note-card__tags {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+// --- Pill --------------------------------------------------------------------
+.pill {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-soft-text);
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+}
+
+.pill--secondary {
+  background: var(--color-secondary-soft);
+  color: var(--color-secondary-soft-text);
+}

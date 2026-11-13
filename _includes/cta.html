@@ -1,0 +1,14 @@
+{%- comment -%}
+  Closing call-to-action block used at the bottom of most pages.
+  {% include cta.html %}  (copy comes from _data/cta.yml; override with heading=, body=)
+{%- endcomment -%}
+<section class="section">
+  <div class="container">
+    <div class="callout">
+      <p class="eyebrow eyebrow--on-accent">{{ include.eyebrow | default: site.data.cta.eyebrow }}</p>
+      <h2>{{ include.heading | default: site.data.cta.heading }}</h2>
+      <p>{{ include.body | default: site.data.cta.body }}</p>
+      {% include button.html url="/coaching-call/" label=site.data.cta.button variant="light" icon="↗" %}
+    </div>
+  </div>
+</section>

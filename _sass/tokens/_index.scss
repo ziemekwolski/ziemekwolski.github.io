@@ -1,0 +1,217 @@
+// =============================================================================
+// Design tokens: the single source of truth for every visual decision.
+//
+// Sass maps hold the raw values. They are emitted as CSS custom properties on
+// :root (see `emit` below), and components use the properties (`var(--…)`),
+// never raw hex values or pixel sizes.
+//
+// Naming:  --{category}-{role}[-{variant}]
+// =============================================================================
+
+@use "sass:map";
+
+// --- Color: palette (raw values; don't use these directly in components) ----
+$palette: (
+  "navy-950": #0e1935,
+  "navy-900": #101b35,
+  "navy-850": #111c3d,
+  "navy-700": #304478,
+  "slate-600": #42516a,
+  "slate-500": #63718a,
+  "slate-400": #8290a7,
+  "slate-300": #b8c6e2,
+  "slate-200": #ccd5e7,
+  "slate-100": #e3e9f4,
+  "blue-700": #2453b8,
+  "blue-600": #234ce6,
+  "blue-500": #315cf5,
+  "blue-300": #93baff,
+  "blue-200": #c4d7ff,
+  "blue-100": #e7efff,
+  "blue-50": #f3f7ff,
+  "cyan-500": #25c4ed,
+  "cyan-600": #11aace,
+  "violet-500": #6b72ed,
+  "violet-400": #9b94ff,
+  "violet-100": #efedff,
+  "violet-700": #655aca,
+  "white": #ffffff,
+);
+
+@function palette($name) {
+  @return map.get($palette, $name);
+}
+
+// --- Color: semantic roles (use these) ---------------------------------------
+$color: (
+  "text": palette("navy-900"),
+  "text-muted": palette("slate-500"),
+  "text-subtle": palette("slate-400"),
+  "text-on-dark": palette("white"),
+  "text-on-dark-muted": palette("slate-300"),
+  "surface": palette("white"),
+  "surface-subtle": palette("blue-50"),
+  "surface-raised": #f7f9fe,
+  "surface-dark": palette("navy-850"),
+  "surface-footer": palette("navy-950"),
+  "border": palette("slate-100"),
+  "border-strong": palette("slate-200"),
+  "border-accent": #aac0ff,
+  "border-highlight": palette("blue-200"),
+  "accent": palette("blue-500"),
+  "accent-hover": palette("blue-600"),
+  "accent-soft": palette("blue-100"),
+  "accent-soft-text": palette("blue-700"),
+  "accent-on-dark": palette("blue-300"),
+  "secondary-soft": palette("violet-100"),
+  "secondary-soft-text": palette("violet-700"),
+  "focus": palette("cyan-500"),
+);
+
+// Gradients are tokens too, so the brand look lives in one place.
+$gradient: (
+  "brand-text": linear-gradient(90deg, palette("blue-500") 0%, palette("violet-500") 60%, palette("cyan-600") 100%),
+  "brand-bar": linear-gradient(90deg, palette("blue-500"), palette("cyan-500")),
+  "wordmark-underline": linear-gradient(90deg, palette("blue-500") 10%, palette("blue-500") 65%, palette("blue-300") 100%),
+  "callout": linear-gradient(120deg, #3059ef, #4c6af5 45%, #399bdc),
+  "hero": (
+    radial-gradient(ellipse at 9% 65%, rgba(178, 212, 255, 0.28), transparent 47%),
+    radial-gradient(ellipse at 96% 1%, rgba(116, 205, 255, 0.23), transparent 41%),
+    linear-gradient(125deg, #fff 28%, #f6f9ff 100%)
+  ),
+  "page-hero": linear-gradient(145deg, #fff, #f1f6ff),
+  "highlight-card": linear-gradient(145deg, #edf2ff, #e1f7ff),
+  "portrait": linear-gradient(145deg, #dfeeff, #edeaff),
+  "breathing-orb": (
+    radial-gradient(circle at 32% 28%, rgba(37, 196, 237, 0.75) 0%, rgba(37, 196, 237, 0) 55%),
+    radial-gradient(circle at 50% 50%, rgba(49, 92, 245, 0.75) 0%, rgba(49, 92, 245, 0.45) 40%, rgba(49, 92, 245, 0.15) 62%, rgba(49, 92, 245, 0) 72%)
+  ),
+  "portrait-blob": linear-gradient(145deg, #a6dcff, #dbdcff 55%, #c7ebff),
+);
+
+// --- Typography --------------------------------------------------------------
+$font: (
+  "body": "'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif",
+  "display": "'Inter Tight', 'Inter', system-ui, Arial, sans-serif",
+  "mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+);
+
+// Fluid type scale. `display-*` sizes are for headings; `text-*` for copy.
+$font-size: (
+  "display-xl": clamp(3.25rem, 6.5vw, 6.2rem),   // h1
+  "display-lg": clamp(2.5rem, 4.3vw, 4.6rem),    // h2
+  "display-md": clamp(2.1rem, 4vw, 4.4rem),      // pull quotes
+  "display-sm": clamp(1.3rem, 2.2vw, 2rem),      // h3
+  "text-xl": clamp(1.0625rem, 1.5vw, 1.25rem),   // lede
+  "text-lg": 1.1875rem,                          // section intros, article body
+  "text-md": 1rem,                               // body
+  "text-sm": 0.875rem,                           // UI, buttons
+  "text-xs": 0.8125rem,                          // meta
+  "text-2xs": 0.6875rem,                         // eyebrows, labels
+);
+
+$font-weight: (
+  "regular": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+  "heavy": 800,
+);
+
+$line-height: (
+  "tight": 1.07,
+  "snug": 1.18,
+  "body": 1.65,
+  "relaxed": 1.85,
+);
+
+$letter-spacing: (
+  "display": -0.045em,
+  "logo": -0.069em,
+  "label": 0.08em,
+);
+
+// --- Spacing (4px base) -------------------------------------------------------
+$space: (
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 0.75rem,
+  "4": 1rem,
+  "5": 1.25rem,
+  "6": 1.5rem,
+  "7": 1.75rem,
+  "8": 2rem,
+  "10": 2.5rem,
+  "12": 3rem,
+  "14": 3.5rem,
+  "16": 4rem,
+  "20": 5rem,
+  "24": 6rem,
+);
+
+// Section rhythm is fluid: tighter on phones, generous on desktop.
+$section-space: clamp(4.5rem, 9vw, 6.875rem);
+
+// --- Shape -------------------------------------------------------------------
+$radius: (
+  "sm": 12px,
+  "md": 16px,
+  "lg": 20px,
+  "xl": 24px,
+  "2xl": 30px,
+  "pill": 999px,
+);
+
+$shadow: (
+  "button": 0 8px 22px rgba(49, 92, 245, 0.15),
+  "button-hover": 0 12px 26px rgba(49, 92, 245, 0.25),
+  "float": 0 34px 90px rgba(17, 44, 98, 0.13),
+  "card-hover": 0 18px 40px rgba(17, 44, 98, 0.08),
+  "photo": 0 27px 65px rgba(28, 50, 98, 0.17),
+  "tag": 0 12px 33px rgba(15, 27, 56, 0.13),
+);
+
+// --- Layout ------------------------------------------------------------------
+$layout: (
+  "container": 1200px,
+  "measure": 790px,      // readable line length for long-form text
+  "gutter": 30px,
+  "gutter-sm": 20px,
+  "header-height": 83px,
+  "header-height-sm": 71px,
+);
+
+// Breakpoints are Sass-only (custom properties can't be used in media queries).
+$breakpoints: (
+  "sm": 600px,
+  "md": 900px,
+);
+
+// --- Motion ------------------------------------------------------------------
+$motion: (
+  "fast": 0.2s,
+  "ease": cubic-bezier(0.2, 0.7, 0.2, 1),
+);
+
+// --- Emit as custom properties -----------------------------------------------
+@mixin emit($prefix, $map) {
+  @each $key, $value in $map {
+    --#{$prefix}-#{$key}: #{$value};
+  }
+}
+
+@mixin custom-properties {
+  @include emit("color", $color);
+  @include emit("gradient", $gradient);
+  @include emit("font", $font);
+  @include emit("size", $font-size);
+  @include emit("weight", $font-weight);
+  @include emit("leading", $line-height);
+  @include emit("tracking", $letter-spacing);
+  @include emit("space", $space);
+  @include emit("radius", $radius);
+  @include emit("shadow", $shadow);
+  @include emit("layout", $layout);
+  @include emit("motion", $motion);
+  --section-space: #{$section-space};
+}

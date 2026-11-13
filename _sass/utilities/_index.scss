@@ -1,0 +1,20 @@
+// Utilities: single-purpose helpers. Use sparingly, and prefer a component.
+
+@use "../tools";
+
+.visually-hidden { @include tools.visually-hidden; }
+
+.mt-0 { margin-top: 0 !important; }
+.mt-6 { margin-top: var(--space-6) !important; }
+.mt-8 { margin-top: var(--space-8) !important; }
+.mb-0 { margin-bottom: 0 !important; }
+
+.text-center { text-align: center; }
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+[hidden] { display: none !important; }

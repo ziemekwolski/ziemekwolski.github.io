@@ -1,22 +1,10 @@
+{%- comment -%}
+  Disqus comments, loaded only when the reader asks for them, so no Disqus
+  cookies are set for readers who don't (see site.js).
+{%- endcomment -%}
+<div class="comments-gate" data-disqus-gate data-disqus-shortname="zmwolski" data-disqus-url="{{ page.url | absolute_url }}" data-disqus-identifier="{{ page.id }}" hidden>
+  <button class="btn btn--outline btn--sm" type="button" data-disqus-load>Show comments</button>
+  <p class="meta">Comments are hosted by Disqus, which uses cookies. <a href="/privacy/">Privacy</a></p>
+</div>
 <div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-/*
-var disqus_config = function () {
-this.page.url = 'https://www.zmwolski.com'; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = {{ page.title }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-
-s.src = '//zmwolski.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript><p class="meta">Comments need JavaScript.</p></noscript>
