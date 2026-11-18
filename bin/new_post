@@ -19,7 +19,6 @@ require "uri"
 
 ROOT          = File.expand_path("..", __dir__)
 POSTS_DIR     = File.join(ROOT, "_posts")
-CATEGORY_DIR  = File.join(ROOT, "_categories")
 IMAGES_DIR    = File.join(ROOT, "assets", "images", "posts")
 AUTHOR        = "Ziemek"
 BOOK_A_CALL   = '<a class="coaching-btn" href="https://calendly.com/ziemek-wolski/30min">Book a call with me</a>'
@@ -91,12 +90,16 @@ def yaml(value)
   "\"#{str.gsub('\\', '\\\\\\\\').gsub('"', '\\"')}\""
 end
 
-# { "Productivity" => "productivity", ... } from the files in _categories/.
+NEW_CATEGORY = "New category..."
+
+# Category names already used by posts (the `category:` front matter field).
+# The Insights page builds its filter chips from these same values.
 def categories
-  Dir[File.join(CATEGORY_DIR, "*.md")].sort.each_with_object({}) do |path, map|
-    name = File.read(path)[/^name:\s*(.+)$/, 1]&.strip
-    map[name] = File.basename(path, ".md") if name
-  end
+  Dir[File.join(POSTS_DIR, "*.md")].filter_map do |path|
+    front_matter = File.read(path)[/\A---\s*\n(.*?)\n---/m, 1]
+    value = front_matter && front_matter[/^category:\s*(.+)$/, 1]
+    value&.strip&.delete_prefix('"')&.delete_suffix('"')&.delete_prefix("'")&.delete_suffix("'")
+  end.reject(&:empty?).uniq.sort
 end
 
 # Turns an Unsplash photo page URL into a direct download URL.
@@ -115,11 +118,30 @@ end
 
 # Accepts paths as typed or dragged in from Finder: quoted ('...' or "..."),
 # with backslash-escaped spaces, or starting with ~.
-def expand_local(source)
+# Relative paths are looked up in base_dir (the draft file's folder) first,
+# then in the current directory.
+def expand_local(source, base_dir: Dir.pwd)
   path = source.strip
   path = path[1..-2] if path.length > 1 && path[0] == path[-1] && %w[' "].include?(path[0])
+  path = path[1..-2] if path.start_with?("<") && path.end_with?(">")
   path = path.gsub(/\\(.)/, '\1')
-  File.expand_path(path.sub(/\A~/, Dir.home), Dir.pwd)
+  path = URI.decode_www_form_component(path.sub(/\Afile:\/\//, "")) if path.start_with?("file://")
+  path = path.sub(/\A~(?=\/|\z)/, Dir.home)
+  [base_dir, Dir.pwd].uniq.map { |dir| File.expand_path(path, dir) }.find { |p| File.file?(p) } ||
+    File.expand_path(path, base_dir)
+end
+
+# Picks a file name in dir that doesn't clash with a different existing file.
+def unique_target(dir, name, source_path)
+  ext  = File.extname(name)
+  base = File.basename(name, ext)
+  n = 1
+  loop do
+    candidate = File.join(dir, n == 1 ? name : "#{base}-#{n}#{ext}")
+    return candidate unless File.exist?(candidate) && !FileUtils.identical?(candidate, source_path)
+
+    n += 1
+  end
 end
 
 # "My Photo (1).JPG" -> "my-photo-1.jpg", so the image URL has no spaces.
@@ -131,7 +153,7 @@ end
 
 # Copies or downloads an image into the post's folder.
 # Returns the site path (/assets/images/posts/...) or nil when it fails.
-def store_image(source, image_dir, post_name, name: nil)
+def store_image(source, image_dir, post_name, name: nil, base_dir: Dir.pwd)
   if remote?(source)
     url = unsplash?(source) ? unsplash_download_url(source) : source
     name ||= File.basename(URI(source).path)
@@ -144,33 +166,49 @@ def store_image(source, image_dir, post_name, name: nil)
       return nil
     end
   else
-    path = expand_local(source)
+    path = expand_local(source, base_dir: base_dir)
     unless File.file?(path)
-      warn "  ! File not found: #{source}"
+      warn "  ! File not found: #{source} (looked for #{path})"
       return nil
     end
     name ||= File.basename(path)
     name = "#{name}#{File.extname(path)}" if File.extname(name).empty?
-    name = clean_filename(name)
-    target = File.join(image_dir, name)
-    FileUtils.cp(path, target)
+    target = unique_target(image_dir, clean_filename(name), path)
+    name = File.basename(target)
+    FileUtils.cp(path, target) unless File.exist?(target)
   end
   "/assets/images/posts/#{post_name}/#{name}"
 end
 
-# Finds ![alt](src) in the body. Local files and remote URLs are copied into
-# the post's image folder and the link is rewritten to point at the copy.
-# Links already pointing at /assets/... are left alone.
-def relocate_body_images(body, image_dir, post_name)
-  body.gsub(/!\[([^\]]*)\]\(([^)\s]+)\)/) do
-    alt, src = Regexp.last_match(1), Regexp.last_match(2)
-    if src.start_with?("/")  && !File.exist?(src)
-      "![#{alt}](#{src})"
-    else
-      stored = store_image(src, image_dir, post_name)
-      puts "  + #{stored}" if stored
-      "![#{alt}](#{stored || src})"
-    end
+# ![alt](src) and ![alt](src "title"). src may be wrapped in <...>, contain
+# spaces or backslash-escaped spaces, and contain one level of (parentheses),
+# e.g. "Photo (1).jpg".
+MD_IMAGE   = /!\[([^\]\n]*)\]\(\s*((?:[^()\n]|\([^()\n]*\))+?)(\s+"[^"\n]*")?\s*\)/
+HTML_IMAGE = /(<img\b[^>]*?\ssrc=)(["'])(.+?)\2/i
+
+# Finds images in the body (Markdown or <img> tags). Local files and remote
+# URLs are copied into the post's image folder and the link is rewritten to
+# point at the copy. Site paths (/assets/...) and anything that can't be
+# found are left as they are, with a warning for missing files.
+def relocate_body_images(body, image_dir, post_name, base_dir: Dir.pwd)
+  copied = {}
+  relocate = lambda do |src|
+    src = src.strip
+    return src if src.start_with?("/assets/") || src.start_with?("data:")
+    return copied[src] if copied.key?(src)
+
+    stored = store_image(src, image_dir, post_name, base_dir: base_dir)
+    puts "  + #{stored}" if stored
+    copied[src] = stored || src
+  end
+
+  body = body.gsub(MD_IMAGE) do
+    alt, src, title = Regexp.last_match(1), Regexp.last_match(2), Regexp.last_match(3)
+    "![#{alt}](#{relocate.call(src)}#{title})"
+  end
+  body.gsub(HTML_IMAGE) do
+    prefix, quote, src = Regexp.last_match(1), Regexp.last_match(2), Regexp.last_match(3)
+    "#{prefix}#{quote}#{relocate.call(src)}#{quote}"
   end
 end
 
@@ -217,8 +255,8 @@ if File.exist?(post_path)
   abort "\n#{post_path.sub("#{ROOT}/", '')} already exists. Pick another title, slug or date." unless yes?("#{post_name}.md already exists. Overwrite it?", default: false)
 end
 
-cats = categories
-category = choose("Category", cats.keys)
+category = choose("Category", categories + [NEW_CATEGORY])
+category = ask("New category name", required: true) if category == NEW_CATEGORY
 excerpt  = ask("Excerpt (one or two sentences for the home page)", required: true)
 keywords = ask("SEO keywords (comma separated)", default: category.downcase)
 
@@ -239,7 +277,7 @@ body =
     puts "Using post text from #{body_file}"
     File.read(body_file)
   else
-    read_multiline("Post text (Markdown). Use ![alt](path/or/url) for images; they are copied in for you.")
+    read_multiline("Post text (Markdown). Use ![alt](path/or/url) for images (local files or URLs); they are copied in for you.")
   end
 abort "No post text given." if body.strip.empty?
 
@@ -281,13 +319,13 @@ loop do
   extra_images << stored
 end
 
-body = relocate_body_images(body, image_dir, post_name)
+body_dir = body_file ? File.dirname(File.expand_path(body_file)) : Dir.pwd
+puts "Copying images used in the post text..." if body.match?(MD_IMAGE) || body.match?(HTML_IMAGE)
+body = relocate_body_images(body, image_dir, post_name, base_dir: body_dir)
 body = keep_line_breaks(body) if line_breaks
 body = body.strip
 body = body.sub(/\A#\s+.*\n+/, "") # the template adds the title heading itself
 body += "\n\n#{BOOK_A_CALL}" if add_button
-
-category_url = "/categories/#{cats[category]}.html"
 
 content = <<~MD
   ---
@@ -296,7 +334,6 @@ content = <<~MD
   excerpt: #{yaml(excerpt)}
   author: #{AUTHOR}
   category: #{yaml(category)}
-  category_url: #{category_url}
   seo_keywords: #{yaml(keywords)}
   hero-image-url: #{hero_url}
   hero-image-author: #{yaml(hero_author)}
