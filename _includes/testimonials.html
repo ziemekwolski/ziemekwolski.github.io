@@ -1,0 +1,15 @@
+{%- comment -%}
+  Section showing every testimonial in _data/testimonials.yml as a grid of cards.
+  {% include testimonials.html %}                 (plain background)
+  {% include testimonials.html variant="subtle" %} (grey background)
+{%- endcomment -%}
+<section class="section{% if include.variant %} section--{{ include.variant }}{% endif %}">
+  <div class="container">
+    {% include section-intro.html eyebrow="Client stories" heading="What engineers say about coaching." %}
+    <div class="grid grid--2">
+      {%- for t in site.data.testimonials %}
+      {% include testimonial.html testimonial=t %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>

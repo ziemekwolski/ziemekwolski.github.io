@@ -228,3 +228,54 @@ $tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
   background: var(--color-secondary-soft);
   color: var(--color-secondary-soft-text);
 }
+
+// --- Testimonial -------------------------------------------------------------
+//   <figure class="testimonial">
+//     <blockquote class="testimonial__quote"><p>…</p></blockquote>
+//     <figcaption class="testimonial__author"><strong>Name</strong><span class="meta">Role</span></figcaption>
+//   </figure>
+.testimonial {
+  @include tools.card;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
+  padding: var(--space-8);
+
+  @include tools.below("sm") {
+    padding: var(--space-6);
+  }
+}
+
+.testimonial__quote {
+  position: relative;
+  margin: 0;
+  padding-top: var(--space-10);
+
+  // Large accent quotation mark.
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "\201C";
+    font: var(--weight-semibold) 4rem/1 var(--font-display);
+    color: var(--color-accent);
+  }
+
+  p {
+    margin: 0;
+    font-size: var(--size-text-xl);
+    line-height: var(--leading-body);
+    color: var(--color-text);
+  }
+}
+
+.testimonial__author {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: auto;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+
+  .meta { display: block; }
+}

@@ -1,0 +1,16 @@
+# Client testimonials, shown on the home, program and coaching call pages.
+#   id:      short handle, used to pick one quote: {% include testimonial.html id="matt" %}
+#   quote:   the testimonial text (no surrounding quotation marks)
+#   name:    optional; omit for anonymous testimonials
+#   role:    job title
+#   company: optional
+
+- id: matt
+  quote: I came in doubting my judgment after a string of setbacks. Ziemek helped me rebuild the confidence to trust my gut, ship across web and mobile, and see AI as something that expands what I can build. Worth every session.
+  name: Matt Shelley
+  role: Senior Software Engineer
+
+- id: security-frontend
+  quote: "Working with Ziemek has made a real difference: I feel less overwhelmed, communicate more clearly, and am better prepared to lead conversations."
+  role: Senior Software Engineer, Frontend
+  company: Large Tech Security Firm

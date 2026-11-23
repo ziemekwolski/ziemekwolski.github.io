@@ -1,0 +1,20 @@
+{%- comment -%}
+  One testimonial card, picked from _data/testimonials.yml by id.
+  {% include testimonial.html id="matt" %}
+  (or pass the record directly: {% include testimonial.html testimonial=t %})
+{%- endcomment -%}
+{%- if include.testimonial -%}
+  {%- assign t = include.testimonial -%}
+{%- else -%}
+  {%- assign t = site.data.testimonials | where: "id", include.id | first -%}
+{%- endif -%}
+{%- if t %}
+<figure class="testimonial{% if include.class %} {{ include.class }}{% endif %}">
+  <blockquote class="testimonial__quote"><p>{{ t.quote }}</p></blockquote>
+  <figcaption class="testimonial__author">
+    <strong>{{ t.name | default: t.role }}</strong>
+    {%- if t.name %}<span class="meta">{{ t.role }}</span>{% endif %}
+    {%- if t.company %}<span class="meta">{{ t.company }}</span>{% endif %}
+  </figcaption>
+</figure>
+{%- endif -%}

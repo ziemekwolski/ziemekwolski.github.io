@@ -37,7 +37,7 @@ Change a value in `_sass/tokens/_index.scss` and it updates everywhere.
 | `_button`     | `.btn`, `.btn--outline`, `.btn--light`, `.actions`, `.text-link`               |
 | `_chrome`     | `.logo`, `.site-header`, `.nav*`, `.site-footer*`, `.skip-link`                |
 | `_hero`       | `.hero`, `.hero__portrait`, `.hero__tag`, `.page-hero`, `.badge`              |
-| `_cards`      | `.card`, `.step`, `.panel`, `.check-list` (`--ticks`), `.timeline*`, `.note-card*`, `.pill` |
+| `_cards`      | `.card`, `.step`, `.panel`, `.check-list` (`--ticks`), `.timeline*`, `.note-card*`, `.pill`, `.testimonial*` |
 | `_blocks`     | `.callout`, `.portrait`, `.avatar`, `.faq*`, `.booking`, `.article-card*`, `.chips`, `.author-box` |
 | `_prose`      | `.prose` (`--full`) (Markdown content), `.comments-gate`, Rouge syntax colours, post hero image |
 | `_breathing`  | `.breathing*` (box breathing timer), `.switch`                                 |
@@ -51,13 +51,15 @@ Class names follow BEM-ish rules: `.block`, `.block__part`, `.block--variant`.
   `heading_accent`, `lede`, `hero_actions`), then the content, then the CTA
   (turn the CTA off with `hide_cta: true`).
 - `_layouts/post.html` is used by every post automatically, via `defaults` in `_config.yml`.
-- Includes: `button.html`, `section-intro.html`, `cta.html`, `article-card.html`.
+- Includes: `button.html`, `section-intro.html`, `cta.html`, `article-card.html`,
+  `testimonial.html` (one quote by `id`), `testimonials.html` (full section).
 
 ## Content lives in `_data/`
 
 - `navigation.yml`: header and footer links.
 - `cta.yml`: the closing call-to-action copy.
 - `coaching.yml`: steps, roadmap, topics and FAQ, shared by the home and program pages.
+- `testimonials.yml`: client quotes, shown on the home, program and coaching call pages.
 - `_config.yml`: `booking_url` (Calendly).
 
 ## Adding something new

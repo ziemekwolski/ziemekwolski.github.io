@@ -7,8 +7,8 @@ steps:
     body: Identify the changes that would make the biggest difference.
   - title: Practice
     body: Work through real conversations, decisions, and projects.
-  - title: Adjust
-    body: Review what's working and adapt as your circumstances change.
+  - title: Grow
+    body: Review what's working, adapt to what's changing, and build on your progress.
 
 roadmap:
   - title: Understand your situation.
@@ -20,8 +20,8 @@ roadmap:
   - title: Practice in real situations.
     body: Bring upcoming conversations, decisions, projects, or feedback. We'll work through them and agree on next steps.
     focus: Actions you can use at work
-  - title: Reflect and adjust.
-    body: We'll review what's working, build on your progress, and adapt the plan as your circumstances change.
+  - title: Reflect and grow.
+    body: We'll review what's working, build on your progress, and adapt the plan to what's changing.
     focus: Learning and continued progress
 
 topics:

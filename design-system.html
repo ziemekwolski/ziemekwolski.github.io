@@ -83,6 +83,19 @@ hide_cta: true
 
 <section class="section">
   <div class="container">
+    {% include section-intro.html eyebrow="Components" heading="Testimonial" body="testimonial.html renders one quote by id; testimonials.html renders the full section." %}
+    <div class="grid grid--2">
+      <figure class="testimonial">
+        <blockquote class="testimonial__quote"><p>.testimonial with a quote, a name and a role.</p></blockquote>
+        <figcaption class="testimonial__author"><strong>Name</strong><span class="meta">Role</span></figcaption>
+      </figure>
+      {% include testimonial.html id="security-frontend" %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
     {% include section-intro.html eyebrow="Components" heading="FAQ" %}
     <div class="faq">
       <details class="faq__item"><summary>.faq__item uses native &lt;details&gt;</summary><p>No JavaScript required.</p></details>
