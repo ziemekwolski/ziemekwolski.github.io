@@ -16,6 +16,7 @@ layout: default
       {%- endfor %}
     </div>
     {% endif %}
+    {% if page.hero_note %}<p class="meta mt-6">{{ page.hero_note }}</p>{% endif %}
   </div>
 </section>
 {{ content }}
